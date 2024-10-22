@@ -1,0 +1,36 @@
+@use "../../styles/partials/flexbox-kit" as *;
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.comment-form {
+  @include flex-row(center, center, 1rem);
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-bottom: 1.5px solid $secondary-medium;
+
+  &__avatar {
+    object-position: 20%;
+    position: relative;
+    bottom: 3.5625rem;
+  }
+
+  &__input-wrapper {
+    flex-grow: 1;
+    @include flex-column(center, flex-start);
+  }
+
+  &__input {
+    width: 100%;
+    margin-bottom: 1rem;
+    min-height: 7.5rem !important;
+    @include input;
+  }
+
+  &__label {
+    @include mobile-labels-buttons;
+    font-weight: 600;
+    color: $primary-medium;
+    margin-bottom: 0.25rem;
+  }
+}

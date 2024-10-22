@@ -1,11 +1,9 @@
-@use "../../styles/partials/variables" as *;
 @use "../../styles/partials/flexbox-kit" as *;
-@use "../../styles/partials/type-kit" as *;
 @use "../../styles/partials/mixins" as *;
 
 .search-form {
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 0;
   @include flex-row(center, center, 1rem);
   flex-wrap: wrap;
 
@@ -25,6 +23,7 @@
   &__input {
     width: 100%;
     padding-left: 2.5rem !important;
+    @include input;
   }
 
   &__avatar {

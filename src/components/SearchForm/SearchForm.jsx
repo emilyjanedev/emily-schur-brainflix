@@ -1,6 +1,5 @@
 import "./SearchForm.scss";
 import Button from "../Button/Button";
-import Input from "../Input/Input";
 import Avatar from "../Avatar/Avatar";
 import userAvatar from "../../assets/images/Mohan-muruge.jpg";
 import uploadIcon from "../../assets/images/icons/upload.svg";
@@ -15,12 +14,12 @@ function SearchForm() {
           alt="magnifying class icon"
           className="search-form__search-icon"
         />
-        <Input
+        <input
           type="text"
           name="query"
           id="search"
           placeholder="Search"
-          nameOfClass="search-form__input"
+          className="search-form__input"
         />
       </div>
       <Avatar src={userAvatar} nameOfClass="search-form__avatar" />
