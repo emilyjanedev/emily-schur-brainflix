@@ -1,6 +1,7 @@
 import "./SearchForm.scss";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
+import Avatar from "../Avatar/Avatar";
 import userAvatar from "../../assets/images/Mohan-muruge.jpg";
 import uploadIcon from "../../assets/images/icons/upload.svg";
 import searchIcon from "../../assets/images/icons/search.svg";
@@ -22,7 +23,7 @@ function SearchForm() {
           nameOfClass="search-form__input"
         />
       </div>
-      <img src={userAvatar} alt="user avatar" className="search-form__avatar" />
+      <Avatar src={userAvatar} nameOfClass="search-form__avatar" />
       <Button
         nameOfClass="search-form__button"
         icon={uploadIcon}
