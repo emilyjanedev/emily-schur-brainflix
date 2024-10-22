@@ -1,0 +1,51 @@
+// Mobile
+@mixin mobile-page-header {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+@mixin mobile-section-header {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+@mixin mobile-subheader {
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+@mixin mobile-body-copy {
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+@mixin mobile-labels-buttons {
+  font-size: 0.625rem;
+  font-weight: 700;
+}
+
+// Tablet & Desktop
+@mixin tablet-page-header {
+  font-size: 2.0625rem;
+  font-weight: 700;
+}
+
+@mixin tablet-section-header {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+@mixin tablet-subheader {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+@mixin tablet-body-copy {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+@mixin tablet-labels-buttons {
+  font-size: 0.75rem;
+  font-weight: 700;
+}

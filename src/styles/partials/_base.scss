@@ -1,0 +1,36 @@
+@use "./variables" as *;
+
+// Set up border-box box-sizing on root element
+html {
+  box-sizing: border-box;
+}
+
+// Make all elements from the DOM inherit parent box-sizing and remove default padding/margin
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+// Basic link styling
+a {
+  color: $primary-dark;
+  text-decoration: none;
+}
+
+// Basic img styling
+img {
+  width: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+// Override browser auto-fill styling in form
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 0s 600000s, color 0s 600000s !important;
+}

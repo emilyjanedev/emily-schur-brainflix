@@ -1,0 +1,37 @@
+@use "./type-kit" as *;
+@use "./variables" as *;
+@use "./mixins" as *;
+
+body {
+  font-family: $font-stack;
+  color: $primary-dark;
+  @include mobile-body-copy;
+
+  @include tablet {
+    @include tablet-body-copy;
+  }
+}
+
+h1 {
+  @include mobile-page-header;
+
+  @include tablet {
+    @include tablet-page-header;
+  }
+}
+
+h2 {
+  @include mobile-section-header;
+
+  @include tablet {
+    @include tablet-section-header;
+  }
+}
+
+h3 {
+  @include mobile-subheader;
+
+  @include tablet {
+    @include tablet-subheader;
+  }
+}
