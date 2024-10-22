@@ -7,7 +7,7 @@ function Avatar({ src, nameOfClass }) {
   );
 }
 Avatar.propTypes = {
-  src: PropTypes.string.isRequired,
+  src: PropTypes.string,
   nameOfClass: PropTypes.string.isRequired,
 };
 export default Avatar;

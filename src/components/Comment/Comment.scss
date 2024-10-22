@@ -1,0 +1,20 @@
+@use "../../styles/partials/flexbox-kit" as *;
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.comment {
+  @include flex-row(space-between, flex-start, 1rem);
+  padding: 1rem 0;
+  border-bottom: 1.5px solid $secondary-medium;
+
+  &__content {
+    flex-grow: 1;
+    @include flex-row(space-between, center, 0.25rem);
+    flex-wrap: wrap;
+  }
+
+  &__timestamp {
+    color: $primary-medium;
+  }
+}
