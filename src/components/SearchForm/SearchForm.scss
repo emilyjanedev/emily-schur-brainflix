@@ -1,0 +1,33 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/flexbox-kit" as *;
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/mixins" as *;
+
+.search-form {
+  width: 100%;
+  padding: 1rem;
+  @include flex-row(center, center, 1rem);
+  flex-wrap: wrap;
+
+  &__search-wrapper {
+    flex-grow: 1;
+    position: relative;
+  }
+
+  &__search-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+    position: absolute;
+    left: 0.75rem;
+    top: 0.875rem;
+  }
+
+  &__input {
+    width: 100%;
+    padding-left: 2.5rem !important;
+  }
+
+  &__avatar {
+    @include avatar;
+  }
+}

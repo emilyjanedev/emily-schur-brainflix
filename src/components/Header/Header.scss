@@ -1,0 +1,14 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/flexbox-kit" as *;
+@use "../../styles/partials/type-kit" as *;
+
+.header {
+  @include flex-row(center, center);
+  flex-wrap: wrap;
+
+  &__logo {
+    max-height: 2.5rem;
+    max-width: 12.5rem;
+    margin-top: 1rem;
+  }
+}
