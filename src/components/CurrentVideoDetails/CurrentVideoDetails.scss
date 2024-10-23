@@ -15,7 +15,7 @@
   &__information {
     color: $primary-medium;
     padding: 1rem 0;
-    @include flex-row(flex-start, center, 3rem);
+    @include flex-row(space-between, center);
     flex-wrap: wrap;
     border-bottom: 1px solid $secondary-medium;
   }
