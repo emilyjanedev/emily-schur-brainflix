@@ -2,7 +2,6 @@
 
 .video {
   @include flex-row(center, stretch, 1rem);
-  padding: 1rem 0;
 
   &__info-wrapper {
     flex-grow: 1;

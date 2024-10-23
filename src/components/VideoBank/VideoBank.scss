@@ -1,5 +1,6 @@
 @use "../../styles/partials/type-kit" as *;
 @use "../../styles/partials/variables" as *;
+@use "../../styles/partials/flexbox-kit" as *;
 
 .video-bank {
   padding: 1rem;
@@ -7,5 +8,10 @@
   &__title {
     @include mobile-labels-buttons;
     color: $primary-medium;
+  }
+
+  &__list {
+    @include flex-column(center, center, 1rem);
+    padding: 1rem 0;
   }
 }
