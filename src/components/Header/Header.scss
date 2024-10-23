@@ -5,6 +5,7 @@
 .header {
   @include flex-row(center, center);
   flex-wrap: wrap;
+  padding: 0 1rem;
 
   &__logo {
     max-height: 2.5rem;

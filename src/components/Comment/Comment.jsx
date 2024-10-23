@@ -4,10 +4,10 @@ import Avatar from "../Avatar/Avatar";
 import userAvatar from "../../assets/images/Mohan-muruge.jpg";
 
 function Comment({ comment }) {
-  const { name, comment: description, timestamp } = comment;
+  const { name, comment: description, timestamp, id } = comment;
 
   return (
-    <article className="comment">
+    <article className="comment" id={id}>
       <Avatar src={userAvatar} nameOfClass="comment__avatar" />
       <div className="comment__content">
         <h3 className="comment__author">{name}</h3>

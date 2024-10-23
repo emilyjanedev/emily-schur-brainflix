@@ -1,0 +1,51 @@
+@use "../../styles/partials/flexbox-kit" as *;
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.video-details {
+  padding: 0 1rem;
+
+  &__title {
+    @include mobile-page-header;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid $secondary-medium;
+  }
+
+  &__information {
+    color: $primary-medium;
+    padding: 1rem 0;
+    @include flex-row(flex-start, center, 3rem);
+    flex-wrap: wrap;
+    border-bottom: 1px solid $secondary-medium;
+  }
+
+  &__stats-wrapper,
+  &__content-wrapper {
+    @include flex-column(center, flex-start, 1rem);
+  }
+
+  &__views-wrapper,
+  &__likes-wrapper {
+    @include flex-row(flex-start, center, 0.5rem);
+  }
+
+  &__channel {
+    @include mobile-subheader;
+    color: $primary-dark;
+  }
+
+  &__icon {
+    width: 1.25rem;
+  }
+
+  &__description {
+    line-height: 1.5;
+    padding: 1rem 0;
+  }
+
+  &__comment-count {
+    @include mobile-subheader;
+    padding-bottom: 0.25rem;
+  }
+}
