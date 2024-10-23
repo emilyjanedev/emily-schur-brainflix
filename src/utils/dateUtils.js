@@ -1,13 +1,12 @@
 export function formatDate(timestamp) {
   const date = new Date(timestamp);
   const options = {
-    weekday: "short",
     year: "numeric",
-    month: "short",
+    month: "numeric",
     day: "numeric",
   };
   const newDate = date.toLocaleDateString("en-US", options);
-  return newDate.replaceAll(",", "");
+  return newDate;
 }
 
 export function createDynamicTimestamp(timestamp) {
