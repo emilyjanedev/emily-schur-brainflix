@@ -1,5 +1,5 @@
 import "./VideoBank.scss";
-import VideoCard from "../VideoCard/VideoCard";
+import Video from "../Video/Video";
 
 const testVideo = {
   id: "84e96018-4022-434e-80bf-000ce4cd12b8",
@@ -47,7 +47,7 @@ function VideoBank() {
     <section className="video-bank">
       <h2 className="video-bank__title">NEXT VIDEOS</h2>
       <div className="video-bank__list">
-        <VideoCard video={testVideo} />
+        <Video video={testVideo} />
       </div>
     </section>
   );

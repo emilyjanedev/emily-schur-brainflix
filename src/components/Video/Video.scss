@@ -1,3 +1,17 @@
+@use "../../styles/partials/flexbox-kit" as *;
+
 .video {
-  width: 100%;
+  @include flex-row(center, stretch, 1rem);
+  padding: 1rem 0;
+
+  &__info-wrapper {
+    flex-grow: 1;
+    @include flex-column(space-between, flex-start);
+  }
+
+  &__image {
+    border-radius: 4px;
+    width: 35%;
+    object-fit: cover;
+  }
 }

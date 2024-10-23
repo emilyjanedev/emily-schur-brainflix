@@ -1,6 +1,6 @@
-import "./VideoSection.scss";
-import Video from "../Video/Video";
-import VideoDetails from "../VideoDetails/VideoDetails";
+import "./CurrentVideoSection.scss";
+import CurrentVideo from "../CurrentVideo/CurrentVideo";
+import CurrentVideoDetails from "../CurrentVideoDetails/CurrentVideoDetails";
 
 const testVideo = {
   id: "84e96018-4022-434e-80bf-000ce4cd12b8",
@@ -43,13 +43,13 @@ const testVideo = {
   ],
 };
 
-function VideoSection() {
+function CurrentVideoSection() {
   return (
     <>
-      <Video video={testVideo} />
-      <VideoDetails video={testVideo} />
+      <CurrentVideo video={testVideo} />
+      <CurrentVideoDetails video={testVideo} />
     </>
   );
 }
 
-export default VideoSection;
+export default CurrentVideoSection;
