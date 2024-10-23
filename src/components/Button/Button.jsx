@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 
 function Button({ nameOfClass, icon, cta }) {
   return (
-    <button className={`button ${nameOfClass}`}>
-      <img src={icon} className="button__icon"></img>
+    <button
+      className={`button ${nameOfClass}`}
+      style={{ backgroundImage: `url(${icon})` }}
+    >
       <span className="button__text">{cta}</span>
     </button>
   );

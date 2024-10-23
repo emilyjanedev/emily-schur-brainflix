@@ -3,17 +3,11 @@ import Button from "../Button/Button";
 import Avatar from "../Avatar/Avatar";
 import userAvatar from "../../assets/images/Mohan-muruge.jpg";
 import uploadIcon from "../../assets/images/icons/upload.svg";
-import searchIcon from "../../assets/images/icons/search.svg";
 
 function SearchForm() {
   return (
     <form action="submit" className="search-form">
       <div className="search-form__search-wrapper">
-        <img
-          src={searchIcon}
-          alt="magnifying class icon"
-          className="search-form__search-icon"
-        />
         <input
           type="text"
           name="query"

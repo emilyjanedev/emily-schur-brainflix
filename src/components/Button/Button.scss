@@ -10,19 +10,9 @@
   color: $primary-light;
   border: none;
   padding: 0 0.75rem;
-  text-align: center;
   @include mobile-labels-buttons;
-  @include flex-row(flex-start, center, 0.5rem);
-
-  &__icon {
-    height: 1.5625rem;
-    width: 1.5625rem;
-  }
-
-  &__text {
-    flex-grow: 1;
-    line-height: 0.9375rem;
-  }
+  background-position: 0.75rem 0.875rem;
+  background-repeat: no-repeat;
 
   &:hover {
     background-color: $brainflix-dark-blue;
