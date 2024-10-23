@@ -1,8 +1,9 @@
 import "./CurrentVideo.scss";
 import PropTypes from "prop-types";
 
-function CurrentVideo({ video }) {
-  const { video: src, image, id } = video;
+function CurrentVideo({ activeVideo }) {
+  console.log(activeVideo);
+  const { video: src, image, id } = activeVideo;
 
   return (
     <video controls src={src} poster={image} className="video" id={id}>
@@ -11,7 +12,7 @@ function CurrentVideo({ video }) {
   );
 }
 CurrentVideo.propTypes = {
-  video: PropTypes.object.isRequired,
+  activeVideo: PropTypes.object.isRequired,
 };
 
 export default CurrentVideo;

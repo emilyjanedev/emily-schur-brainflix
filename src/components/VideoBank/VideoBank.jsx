@@ -1,11 +1,9 @@
 import "./VideoBank.scss";
 import Video from "../Video/Video";
-import videos from "../../data/video-details.json";
+import PropTypes from "prop-types";
 
-function VideoBank() {
-  const filteredList = videos.filter(
-    (video) => video.id !== "84e96018-4022-434e-80bf-000ce4cd12b8"
-  );
+function VideoBank({ videos, activeVideo }) {
+  const filteredList = videos.filter((video) => video.id !== activeVideo.id);
 
   return (
     <section className="video-bank">
@@ -18,5 +16,10 @@ function VideoBank() {
     </section>
   );
 }
+
+VideoBank.propTypes = {
+  videos: PropTypes.array.isRequired,
+  activeVideo: PropTypes.object.isRequired,
+};
 
 export default VideoBank;

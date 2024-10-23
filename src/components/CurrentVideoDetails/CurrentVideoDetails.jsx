@@ -4,9 +4,9 @@ import { formatDate } from "../../utils/dateUtils";
 import viewsIcon from "../../assets/images/icons/views.svg";
 import likesIcon from "../../assets/images/icons/likes.svg";
 
-function CurrentVideoDetails({ video }) {
+function CurrentVideoDetails({ activeVideo }) {
   const { id, title, channel, description, views, likes, timestamp, comments } =
-    video;
+    activeVideo;
 
   return (
     <article className="video-details" id={id}>
@@ -41,7 +41,7 @@ function CurrentVideoDetails({ video }) {
   );
 }
 CurrentVideoDetails.propTypes = {
-  video: PropTypes.object.isRequired,
+  activeVideo: PropTypes.object.isRequired,
 };
 
 export default CurrentVideoDetails;
