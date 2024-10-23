@@ -1,0 +1,11 @@
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/variables" as *;
+
+.video-bank {
+  padding: 1rem;
+
+  &__title {
+    @include mobile-labels-buttons;
+    color: $primary-medium;
+  }
+}
