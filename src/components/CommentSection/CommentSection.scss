@@ -1,3 +1,15 @@
+@use "../../styles/partials/mixins" as *;
+
 .comment-section {
-  padding: 0 1rem;
+  padding: 0 4vw;
+
+  @include tablet {
+    padding: 0 5vw;
+  }
+
+  @include desktop {
+    width: 65%;
+    padding-left: 10vw;
+    padding-right: 0;
+  }
 }

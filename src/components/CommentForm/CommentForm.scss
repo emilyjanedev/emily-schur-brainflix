@@ -9,6 +9,10 @@
   padding: 1rem 0;
   border-bottom: 1.5px solid $secondary-medium;
 
+  @include desktop {
+    padding-right: 1.5rem;
+  }
+
   &__avatar {
     object-position: 20%;
     position: relative;

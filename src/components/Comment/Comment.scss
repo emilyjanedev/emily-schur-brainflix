@@ -8,10 +8,24 @@
   padding: 1rem 0;
   border-bottom: 1.5px solid $secondary-medium;
 
+  @include tablet {
+    padding: 1.5rem 0;
+  }
+
+  &:last-child {
+    @include desktop {
+      border-bottom: none;
+    }
+  }
+
   &__content {
     flex-grow: 1;
     @include flex-row(space-between, center, 0.25rem);
     flex-wrap: wrap;
+
+    @include desktop {
+      padding-right: 1.5rem;
+    }
   }
 
   &__description {

@@ -1,7 +1,8 @@
 import "./App.scss";
 import Header from "./components/Header/Header";
 import CommentSection from "./components/CommentSection/CommentSection";
-import CurrentVideoSection from "./components/CurrentVideoSection/CurrentVideoSection";
+import CurrentVideo from "./components/CurrentVideo/CurrentVideo";
+import CurrentVideoDetails from "./components/CurrentVideoDetails/CurrentVideoDetails";
 import VideoBank from "./components/VideoBank/VideoBank";
 import videoData from "./data/video-details.json";
 import { useState } from "react";
@@ -17,13 +18,16 @@ function App() {
   return (
     <>
       <Header />
-      <CurrentVideoSection activeVideo={activeVideo} />
-      <CommentSection activeVideo={activeVideo} />
-      <VideoBank
-        videos={videos}
-        activeVideo={activeVideo}
-        changeActiveVideo={changeActiveVideo}
-      />
+      <CurrentVideo activeVideo={activeVideo} />
+      <div className="layout-container">
+        <CurrentVideoDetails activeVideo={activeVideo} />
+        <CommentSection activeVideo={activeVideo} />
+        <VideoBank
+          videos={videos}
+          activeVideo={activeVideo}
+          changeActiveVideo={changeActiveVideo}
+        />
+      </div>
     </>
   );
 }

@@ -4,7 +4,17 @@
 @use "../../styles/partials/variables" as *;
 
 .video-details {
-  padding: 0 1rem;
+  padding: 0 4vw;
+
+  @include tablet {
+    padding: 0 5vw;
+  }
+
+  @include desktop {
+    width: 65%;
+    padding-left: 10vw;
+    padding-right: 0;
+  }
 
   &__title {
     @include mobile-page-header;
@@ -13,6 +23,7 @@
 
     @include tablet {
       border-bottom-color: transparent;
+      padding-bottom: 0.25rem;
     }
   }
 
@@ -25,6 +36,11 @@
 
     @include tablet {
       padding-top: 0;
+      padding-bottom: 0.5rem;
+    }
+
+    @include desktop {
+      padding-right: 1.5rem;
     }
   }
 
@@ -54,6 +70,14 @@
   &__description {
     line-height: 1.5;
     padding: 1rem 0;
+
+    @include tablet {
+      padding-top: 1.5rem;
+    }
+
+    @include desktop {
+      padding-right: 1.5rem;
+    }
   }
 
   &__comment-count {

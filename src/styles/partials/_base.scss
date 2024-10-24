@@ -1,4 +1,6 @@
 @use "./variables" as *;
+@use "./mixins" as *;
+@use "./flexbox-kit" as *;
 
 // Set up border-box box-sizing on root element
 html {
@@ -28,6 +30,14 @@ img {
 body {
   height: 100%;
   line-height: 1.5;
+}
+
+.layout-container {
+  @include desktop {
+    @include flex-row(flex-start, center);
+    flex-wrap: wrap;
+    position: relative;
+  }
 }
 
 // Override browser auto-fill styling in forms
