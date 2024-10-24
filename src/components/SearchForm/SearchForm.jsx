@@ -5,8 +5,11 @@ import userAvatar from "../../assets/images/Mohan-muruge.jpg";
 import uploadIcon from "../../assets/images/icons/upload.svg";
 
 function SearchForm() {
+  const submitHandler = (event) => {
+    event.preventDefault();
+  };
   return (
-    <form action="submit" className="search-form">
+    <form action="submit" className="search-form" onSubmit={submitHandler}>
       <div className="search-form__search-wrapper">
         <input
           type="text"
