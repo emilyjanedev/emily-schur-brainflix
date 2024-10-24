@@ -10,6 +10,10 @@
     @include mobile-page-header;
     padding: 1.25rem 0;
     border-bottom: 1px solid $secondary-medium;
+
+    @include tablet {
+      border-bottom-color: transparent;
+    }
   }
 
   &__information {
@@ -18,11 +22,19 @@
     @include flex-row(space-between, center);
     flex-wrap: wrap;
     border-bottom: 1px solid $secondary-medium;
+
+    @include tablet {
+      padding-top: 0;
+    }
   }
 
   &__stats-wrapper,
   &__content-wrapper {
     @include flex-column(center, flex-start, 1rem);
+
+    @include tablet {
+      @include flex-row(center, flex-end, 2rem);
+    }
   }
 
   &__views-wrapper,

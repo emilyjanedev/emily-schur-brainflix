@@ -1,6 +1,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/flexbox-kit" as *;
 @use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/mixins" as *;
 
 .button {
   height: 3.125rem;
@@ -13,6 +14,13 @@
   @include mobile-labels-buttons;
   background-position: 0.75rem 0.875rem;
   background-repeat: no-repeat;
+
+  @include tablet {
+    height: 2.8125rem;
+    width: 12.5rem;
+    background-position: 0.75rem 0.6875rem;
+    @include tablet-labels-buttons;
+  }
 
   &:hover {
     background-color: $brainflix-dark-blue;

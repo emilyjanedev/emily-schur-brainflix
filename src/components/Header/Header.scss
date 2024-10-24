@@ -1,15 +1,26 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/flexbox-kit" as *;
 @use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/mixins" as *;
 
 .header {
   @include flex-row(center, center);
   flex-wrap: wrap;
   padding: 0 1rem;
 
+  @include tablet {
+    justify-content: space-between;
+  }
+
   &__logo {
     max-height: 2.5rem;
     max-width: 12.5rem;
     margin-top: 1rem;
+
+    @include tablet {
+      max-height: 1.875rem;
+      max-width: 8.125rem;
+      margin-top: 0;
+    }
   }
 }

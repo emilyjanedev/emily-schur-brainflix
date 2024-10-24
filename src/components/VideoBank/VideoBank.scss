@@ -1,13 +1,22 @@
 @use "../../styles/partials/type-kit" as *;
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/flexbox-kit" as *;
+@use "../../styles/partials/mixins" as *;
 
 .video-bank {
   padding: 1rem;
 
+  @include tablet {
+    width: 50%;
+  }
+
   &__title {
     @include mobile-labels-buttons;
     color: $primary-medium;
+
+    @include tablet {
+      @include tablet-labels-buttons;
+    }
   }
 
   &__list {

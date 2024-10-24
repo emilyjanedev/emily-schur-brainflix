@@ -7,9 +7,9 @@
   @include flex-row(center, center, 1rem);
   flex-wrap: wrap;
 
-  &__search-wrapper {
-    flex-grow: 1;
-    position: relative;
+  @include tablet {
+    width: 75%;
+    flex-wrap: nowrap;
   }
 
   &__search-icon {
@@ -21,15 +21,23 @@
   }
 
   &__input {
-    width: 100%;
+    flex-grow: 1;
     padding-left: 2.5rem !important;
     @include input;
     background-image: url("../../assets/images/icons/search.svg");
     background-position: 0.75rem 0.875rem;
     background-repeat: no-repeat;
+
+    @include tablet {
+      height: 2.8125rem;
+    }
   }
 
   &__avatar {
     object-position: 20%;
+
+    @include tablet {
+      order: 2;
+    }
   }
 }

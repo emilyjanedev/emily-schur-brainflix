@@ -24,17 +24,21 @@
 
 // Inputs
 @mixin input {
+  height: 3.125rem;
   font-family: inherit;
   background-color: $secondary-light;
   border: 2px solid $secondary-medium;
   padding: 0.75rem;
   font-size: 1rem;
-  min-height: 2.25rem;
   border-radius: 0.25rem;
   resize: none;
 
   &::placeholder {
     color: $primary-dark;
+
+    @include tablet {
+      font-size: 0.875rem;
+    }
   }
 
   &:focus {

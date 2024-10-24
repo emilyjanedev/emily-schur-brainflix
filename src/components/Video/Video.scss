@@ -1,4 +1,5 @@
 @use "../../styles/partials/flexbox-kit" as *;
+@use "../../styles/partials/type-kit" as *;
 
 .video {
   @include flex-row(center, stretch, 1rem);

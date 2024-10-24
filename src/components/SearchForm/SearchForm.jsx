@@ -10,15 +10,13 @@ function SearchForm() {
   };
   return (
     <form action="submit" className="search-form" onSubmit={submitHandler}>
-      <div className="search-form__search-wrapper">
-        <input
-          type="text"
-          name="query"
-          id="search"
-          placeholder="Search"
-          className="search-form__input"
-        />
-      </div>
+      <input
+        type="text"
+        name="query"
+        id="search"
+        placeholder="Search"
+        className="search-form__input"
+      />
       <Avatar src={userAvatar} nameOfClass="search-form__avatar" />
       <Button
         nameOfClass="search-form__button"
