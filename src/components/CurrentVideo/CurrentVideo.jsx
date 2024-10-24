@@ -2,7 +2,6 @@ import "./CurrentVideo.scss";
 import PropTypes from "prop-types";
 
 function CurrentVideo({ activeVideo }) {
-  console.log(activeVideo);
   const { video: src, image, id } = activeVideo;
 
   return (

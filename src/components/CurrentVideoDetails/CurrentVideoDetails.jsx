@@ -1,6 +1,6 @@
 import "./CurrentVideoDetails.scss";
 import PropTypes from "prop-types";
-import { formatDate } from "../../utils/dateUtils";
+import { format } from "date-fns";
 import viewsIcon from "../../assets/images/icons/views.svg";
 import likesIcon from "../../assets/images/icons/likes.svg";
 
@@ -14,7 +14,9 @@ function CurrentVideoDetails({ activeVideo }) {
       <div className="video-details__information">
         <div className="video-details__content-wrapper">
           <h2 className="video-details__channel">By {channel}</h2>
-          <p className="video-details__timestamp">{formatDate(timestamp)}</p>
+          <p className="video-details__timestamp">
+            {format(timestamp, "M/dd/yyyy")}
+          </p>
         </div>
         <div className="video-details__stats-wrapper">
           <div className="video-details__views-wrapper">
