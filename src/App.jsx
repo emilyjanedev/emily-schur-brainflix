@@ -11,8 +11,8 @@ function App() {
   const [activeVideo, setActiveVideo] = useState(videos[0]);
   console.log(`In App - activeVideo = ${activeVideo}`);
 
-  const changeActiveVideo = (id) => {
-    setActiveVideo(id);
+  const changeActiveVideo = (video) => {
+    setActiveVideo(video);
   };
 
   return (
@@ -20,7 +20,11 @@ function App() {
       <Header />
       <CurrentVideoSection activeVideo={activeVideo} />
       <CommentSection activeVideo={activeVideo} />
-      <VideoBank videos={videos} activeVideo={activeVideo} />
+      <VideoBank
+        videos={videos}
+        activeVideo={activeVideo}
+        changeActiveVideo={changeActiveVideo}
+      />
     </>
   );
 }
