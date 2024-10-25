@@ -8,13 +8,15 @@ function Video({ video, changeActiveVideo }) {
     changeActiveVideo(video);
   };
   return (
-    <article className="video" onClick={clickHandler}>
-      <img src={image} alt="video thumbnail" className="video__image" />
-      <div className="video__info-wrapper">
-        <h3 className="video__title">{title}</h3>
-        <p className="video__channel">{channel}</p>
-      </div>
-    </article>
+    <li className="video-bank__list-item">
+      <article className="video" onClick={clickHandler}>
+        <img src={image} alt="video thumbnail" className="video__image" />
+        <div className="video__info-wrapper">
+          <h3 className="video__title">{title}</h3>
+          <p className="video__channel">{channel}</p>
+        </div>
+      </article>
+    </li>
   );
 }
 

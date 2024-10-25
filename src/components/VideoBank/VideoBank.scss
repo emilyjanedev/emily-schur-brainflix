@@ -37,6 +37,7 @@
   &__list {
     @include flex-column(center, center, 1rem);
     padding: 1rem 0;
+    list-style-type: none;
 
     @include desktop {
       gap: 0;

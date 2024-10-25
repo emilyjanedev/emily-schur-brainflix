@@ -8,7 +8,7 @@ function VideoBank({ videos, activeVideo, changeActiveVideo }) {
   return (
     <section className="video-bank">
       <h2 className="video-bank__title">NEXT VIDEOS</h2>
-      <div className="video-bank__list">
+      <ul className="video-bank__list">
         {filteredList.map((video) => (
           <Video
             key={video.id}
@@ -16,7 +16,7 @@ function VideoBank({ videos, activeVideo, changeActiveVideo }) {
             changeActiveVideo={changeActiveVideo}
           />
         ))}
-      </div>
+      </ul>
     </section>
   );
 }

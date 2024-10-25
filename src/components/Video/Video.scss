@@ -5,6 +5,7 @@
 
 .video {
   @include flex-row(center, stretch, 1rem);
+  list-style-type: none;
 
   @include desktop {
     padding: 0.5rem;
