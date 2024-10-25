@@ -6,6 +6,7 @@ function Video({ video, changeActiveVideo }) {
 
   const clickHandler = () => {
     changeActiveVideo(video);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
     <li className="video-bank__list-item">

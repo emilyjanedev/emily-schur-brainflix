@@ -6,6 +6,9 @@
   width: 100vw;
   background-color: $secondary-dark;
   object-fit: cover;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 
   @include tablet {
     max-height: 50vw;
@@ -14,5 +17,6 @@
 
   @include desktop {
     max-height: 40vw;
+    position: static;
   }
 }
