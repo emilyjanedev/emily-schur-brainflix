@@ -1,7 +1,7 @@
 import "./Button.scss";
 import PropTypes from "prop-types";
 
-function Button({ nameOfClass, icon, cta }) {
+function Button({ nameOfClass, icon = "", cta }) {
   return (
     <button
       className={`button ${nameOfClass}`}

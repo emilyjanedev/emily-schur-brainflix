@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { formatDistance } from "date-fns";
 import { formatString } from "../../utils/stringUtils";
 import Avatar from "../Avatar/Avatar";
-import avatarPlaceholder from "../../assets/images/avatarPlaceholder.png";
 
 function Comment({ comment }) {
   const { name, comment: description, timestamp, id } = comment;
@@ -11,7 +10,7 @@ function Comment({ comment }) {
   return (
     <li className="comment-list__item">
       <article className="comment" id={id}>
-        <Avatar src={avatarPlaceholder} nameOfClass="comment__avatar" />
+        <Avatar nameOfClass="comment__avatar" />
         <div className="comment__content">
           <h3 className="comment__author">{name}</h3>
           <p className="comment__timestamp">
