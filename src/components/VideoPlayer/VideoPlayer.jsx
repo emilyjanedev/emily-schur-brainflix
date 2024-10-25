@@ -2,10 +2,10 @@ import "./VideoPlayer.scss";
 import PropTypes from "prop-types";
 
 function VideoPlayer({ activeVideo }) {
-  const { video: src, image, id } = activeVideo;
+  const { video: src, image } = activeVideo;
 
   return (
-    <video controls src={src} poster={image} className="current-video" id={id}>
+    <video controls src={src} poster={image} className="current-video">
       <p>Your browser does not support HTML video.</p>
     </video>
   );
