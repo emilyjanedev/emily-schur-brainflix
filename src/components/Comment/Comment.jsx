@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { formatDistance } from "date-fns";
 import { formatString } from "../../utils/stringUtils";
 import Avatar from "../Avatar/Avatar";
-import userAvatar from "../../assets/images/Mohan-muruge.jpg";
+import avatarPlaceholder from "../../assets/images/avatarPlaceholder.png";
 
 function Comment({ comment }) {
   const { name, comment: description, timestamp, id } = comment;
 
   return (
     <article className="comment" id={id}>
-      <Avatar src={userAvatar} nameOfClass="comment__avatar" />
+      <Avatar src={avatarPlaceholder} nameOfClass="comment__avatar" />
       <div className="comment__content">
         <h3 className="comment__author">{name}</h3>
         <p className="comment__timestamp">
