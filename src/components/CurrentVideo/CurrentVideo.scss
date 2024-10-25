@@ -1,3 +1,18 @@
-.video {
-  width: 100%;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.current-video {
+  aspect-ratio: 16 / 9;
+  width: 100vw;
+  background-color: $secondary-dark;
+  object-fit: cover;
+
+  @include tablet {
+    max-height: 50vw;
+    object-fit: contain;
+  }
+
+  @include desktop {
+    max-height: 40vw;
+  }
 }
