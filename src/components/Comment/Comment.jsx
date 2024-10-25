@@ -9,21 +9,23 @@ function Comment({ comment }) {
   const { name, comment: description, timestamp, id } = comment;
 
   return (
-    <article className="comment" id={id}>
-      <Avatar src={avatarPlaceholder} nameOfClass="comment__avatar" />
-      <div className="comment__content">
-        <h3 className="comment__author">{name}</h3>
-        <p className="comment__timestamp">
-          {formatString(
-            formatDistance(timestamp, new Date(), {
-              addSuffix: true,
-              includeSeconds: true,
-            })
-          )}
-        </p>
-        <p className="comment__description">{description}</p>
-      </div>
-    </article>
+    <li className="comment-list__item">
+      <article className="comment" id={id}>
+        <Avatar src={avatarPlaceholder} nameOfClass="comment__avatar" />
+        <div className="comment__content">
+          <h3 className="comment__author">{name}</h3>
+          <p className="comment__timestamp">
+            {formatString(
+              formatDistance(timestamp, new Date(), {
+                addSuffix: true,
+                includeSeconds: true,
+              })
+            )}
+          </p>
+          <p className="comment__description">{description}</p>
+        </div>
+      </article>
+    </li>
   );
 }
 Comment.propTypes = {

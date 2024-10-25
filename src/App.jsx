@@ -18,16 +18,18 @@ function App() {
   return (
     <>
       <NavBar />
-      <VideoPlayer activeVideo={activeVideo} />
-      <div className="layout-container">
-        <VideoDetails activeVideo={activeVideo} />
-        <CommentSection activeVideo={activeVideo} />
-        <VideoBank
-          videos={videos}
-          activeVideo={activeVideo}
-          changeActiveVideo={changeActiveVideo}
-        />
-      </div>
+      <main>
+        <VideoPlayer activeVideo={activeVideo} />
+        <div className="layout-container">
+          <VideoDetails activeVideo={activeVideo} />
+          <CommentSection activeVideo={activeVideo} />
+          <VideoBank
+            videos={videos}
+            activeVideo={activeVideo}
+            changeActiveVideo={changeActiveVideo}
+          />
+        </div>
+      </main>
     </>
   );
 }

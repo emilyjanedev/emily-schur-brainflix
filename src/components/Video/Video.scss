@@ -1,11 +1,9 @@
 @use "../../styles/partials/flexbox-kit" as *;
-@use "../../styles/partials/type-kit" as *;
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
 .video {
   @include flex-row(center, stretch, 1rem);
-  list-style-type: none;
 
   @include desktop {
     padding: 0.5rem;
