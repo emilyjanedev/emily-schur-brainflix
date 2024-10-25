@@ -1,14 +1,14 @@
 import "./Video.scss";
 import PropTypes from "prop-types";
 
-function Video({ video, changeActiveVideo }) {
+function Video({ video }) {
   const { title, channel, image } = video;
 
-  const clickHandler = () => {
-    changeActiveVideo(video);
-  };
+  // const clickHandler = () => {
+  //   changeActiveVideo(video);
+  // };
   return (
-    <article className="video" onClick={clickHandler}>
+    <article className="video">
       <img src={image} alt="video thumbnail" className="video__image" />
       <div className="video__info-wrapper">
         <h3 className="video__title">{title}</h3>
@@ -20,7 +20,6 @@ function Video({ video, changeActiveVideo }) {
 
 Video.propTypes = {
   video: PropTypes.object.isRequired,
-  changeActiveVideo: PropTypes.func.isRequired,
 };
 
 export default Video;
