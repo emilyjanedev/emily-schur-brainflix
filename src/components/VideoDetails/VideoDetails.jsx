@@ -5,11 +5,11 @@ import viewsIcon from "../../assets/images/icons/views.svg";
 import likesIcon from "../../assets/images/icons/likes.svg";
 
 function VideoDetails({ activeVideo }) {
-  const { id, title, channel, description, views, likes, timestamp, comments } =
+  const { title, channel, description, views, likes, timestamp, comments } =
     activeVideo;
 
   return (
-    <article className="video-details" id={id}>
+    <article className="video-details">
       <h1 className="video-details__title">{title}</h1>
       <div className="video-details__information">
         <div className="video-details__content-wrapper">

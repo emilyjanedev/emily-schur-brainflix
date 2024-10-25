@@ -17,7 +17,6 @@ function CommentForm() {
           JOIN THE CONVERSATION
         </label>
         <textarea
-          type="text"
           name="comment"
           id="comment"
           placeholder="Add a new comment"
