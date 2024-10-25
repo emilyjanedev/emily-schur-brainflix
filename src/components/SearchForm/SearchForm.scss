@@ -24,9 +24,11 @@
     flex-grow: 1;
     padding-left: 2.5rem !important;
     @include input;
-    background-image: url("../../assets/images/icons/search.svg");
-    background-position: 0.75rem 0.875rem;
-    background-repeat: no-repeat;
+    & {
+      background-image: url("../../assets/images/icons/search.svg");
+      background-position: 0.75rem 0.875rem;
+      background-repeat: no-repeat;
+    }
 
     @include tablet {
       height: 2.8125rem;
