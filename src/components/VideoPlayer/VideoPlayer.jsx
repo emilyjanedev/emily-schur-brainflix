@@ -1,7 +1,7 @@
-import "./CurrentVideo.scss";
+import "./VideoPlayer.scss";
 import PropTypes from "prop-types";
 
-function CurrentVideo({ activeVideo }) {
+function VideoPlayer({ activeVideo }) {
   const { video: src, image, id } = activeVideo;
 
   return (
@@ -10,8 +10,8 @@ function CurrentVideo({ activeVideo }) {
     </video>
   );
 }
-CurrentVideo.propTypes = {
+VideoPlayer.propTypes = {
   activeVideo: PropTypes.object.isRequired,
 };
 
-export default CurrentVideo;
+export default VideoPlayer;

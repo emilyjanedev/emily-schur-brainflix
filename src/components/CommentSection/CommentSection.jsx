@@ -1,16 +1,13 @@
 import "./CommentSection.scss";
-import Comment from "../Comment/Comment";
 import CommentForm from "../CommentForm/CommentForm";
 import PropTypes from "prop-types";
+import CommentList from "../CommentList/CommentList";
 
 function CommentSection({ activeVideo }) {
-  const { comments } = activeVideo;
   return (
     <section className="comment-section">
       <CommentForm />
-      {comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} />
-      ))}
+      <CommentList activeVideo={activeVideo} />
     </section>
   );
 }

@@ -1,10 +1,10 @@
-import "./CurrentVideoDetails.scss";
+import "./VideoDetails.scss";
 import PropTypes from "prop-types";
 import { format } from "date-fns";
 import viewsIcon from "../../assets/images/icons/views.svg";
 import likesIcon from "../../assets/images/icons/likes.svg";
 
-function CurrentVideoDetails({ activeVideo }) {
+function VideoDetails({ activeVideo }) {
   const { id, title, channel, description, views, likes, timestamp, comments } =
     activeVideo;
 
@@ -42,8 +42,8 @@ function CurrentVideoDetails({ activeVideo }) {
     </article>
   );
 }
-CurrentVideoDetails.propTypes = {
+VideoDetails.propTypes = {
   activeVideo: PropTypes.object.isRequired,
 };
 
-export default CurrentVideoDetails;
+export default VideoDetails;
