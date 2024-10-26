@@ -8,7 +8,7 @@ import videoData from "./data/video-details.json";
 import { useState } from "react";
 
 function App() {
-  const [videos, setVideos] = useState(videoData); //setVideos for future video adding
+  const [videos, setVideos] = useState(videoData);
   const [activeVideo, setActiveVideo] = useState(videos[0]);
 
   const changeActiveVideo = (video) => {
