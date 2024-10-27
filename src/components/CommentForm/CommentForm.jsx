@@ -20,7 +20,7 @@ function CommentForm() {
           name="comment"
           id="comment"
           placeholder="Add a new comment"
-          className="comment-form__input"
+          className="comment-form__input comment-form__input--big"
         ></textarea>
         <Button
           nameOfClass="comment-form__button"
