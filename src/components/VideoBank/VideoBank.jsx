@@ -3,16 +3,17 @@ import Video from "../Video/Video";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { apiBaseUrl, apiKey } from "../../utils/api";
 
 function VideoBank({ activeVideo, changeActiveVideo }) {
   const [videos, setVideos] = useState([]);
-  const apiUrl = import.meta.env.VITE_BRAINFLIX_API_BASE_URL;
-  const apiKey = import.meta.env.VITE_BRAINFLIX_API_KEY;
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/videos?api_key=${apiKey}`);
+        const response = await axios.get(
+          `${apiBaseUrl}/videos?api_key=${apiKey}`
+        );
         setVideos(response.data);
       } catch (error) {
         console.error("Could not fetch videos", error);
