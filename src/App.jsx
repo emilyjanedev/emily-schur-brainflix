@@ -1,15 +1,22 @@
 import "./App.scss";
 import NavBar from "./components/NavBar/NavBar";
-
-import videoData from "./data/video-details.json";
-import { useState } from "react";
 import VideoDetailsPage from "./pages/VideoDetailsPage/VideoDetailsPage";
+import UploadPage from "./pages/UploadPage/UploadPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <NavBar />
-      <VideoDetailsPage />
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<VideoDetailsPage />} />
+          <Route path="/videos/:videoId" element={<VideoDetailsPage />} />
+          <Route path="/upload" element={<UploadPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

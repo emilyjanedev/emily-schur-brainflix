@@ -2,12 +2,13 @@ import CommentSection from "../../components/CommentSection/CommentSection";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import VideoDetails from "../../components/VideoDetails/VideoDetails";
 import VideoBank from "../../components/VideoBank/VideoBank";
-import videoData from "../../data/video-details.json";
 import { useState } from "react";
+import videoData from "../../data/video-details.json";
+
+import { useParams } from "react-router-dom";
 
 function VideoDetailsPage() {
-  const [videos, setVideos] = useState(videoData);
-  const [activeVideo, setActiveVideo] = useState(videos[0]);
+  const [activeVideo, setActiveVideo] = useState(videoData[0]);
 
   const changeActiveVideo = (video) => {
     setActiveVideo(video);
@@ -20,7 +21,6 @@ function VideoDetailsPage() {
         <VideoDetails activeVideo={activeVideo} />
         <CommentSection activeVideo={activeVideo} />
         <VideoBank
-          videos={videos}
           activeVideo={activeVideo}
           changeActiveVideo={changeActiveVideo}
         />
