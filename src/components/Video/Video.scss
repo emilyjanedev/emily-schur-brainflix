@@ -2,6 +2,15 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
 
+.video-bank__list-item {
+  @include desktop {
+    &:hover {
+      background-color: $secondary-light;
+      cursor: pointer;
+    }
+  }
+}
+
 .video {
   @include flex-row(center, stretch, 1rem);
 
@@ -9,11 +18,6 @@
     padding: 0.5rem;
     padding-left: 1.5rem;
     padding-right: 0;
-
-    &:hover {
-      background-color: $secondary-light;
-      cursor: pointer;
-    }
   }
 
   &__info-wrapper {

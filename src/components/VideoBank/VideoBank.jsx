@@ -17,7 +17,6 @@ function VideoBank({ activeVideo, changeActiveVideo }) {
         setVideos(response.data);
       } catch (error) {
         console.error("Could not fetch videos", error);
-        setVideos([]);
       }
     };
     fetchVideos();
@@ -43,7 +42,6 @@ function VideoBank({ activeVideo, changeActiveVideo }) {
 
 VideoBank.propTypes = {
   activeVideo: PropTypes.object.isRequired,
-  changeActiveVideo: PropTypes.func.isRequired,
 };
 
 export default VideoBank;
