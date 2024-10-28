@@ -5,7 +5,7 @@ Follow the steps below to configure the necessary environment files.
 
 1. Copy the `.env.example` template file to create your own `.env` file:
 
-   `bash cp .env.example .env`
+   `cp .env.example .env`
 
 2. Open the `.env` file and add your API key to the `VITE_BRAINFLIX_API_KEY` variable.
 
@@ -27,6 +27,6 @@ VITE_BRAINFLIX_API_KEY=your-api-key-here
 
 After setting up your `.env` file, you can start the development server:
 
-`bash npm run dev`
+`npm run dev`
 
 If you encounter any issues with API requests, double-check that the values in your `.env` file are correct.
