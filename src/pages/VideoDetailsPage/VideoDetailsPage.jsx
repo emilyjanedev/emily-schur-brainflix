@@ -10,15 +10,25 @@ import videoData from "../../data/video-details.json";
 
 function VideoDetailsPage() {
   const { videoId } = useParams();
-  const [activeVideo, setActiveVideo] = useState(videoData[0]);
+  const [activeVideo, setActiveVideo] = useState(null);
+
+  const fetchDefaultVideoId = async () => {
+    const response = await axios.get(`${apiBaseUrl}/videos?api_key=${apiKey}`);
+    return response.data[0].id;
+  };
+
+  const fetchVideoById = async (id) => {
+    const response = await axios.get(
+      `${apiBaseUrl}/videos/${id}?api_key=${apiKey}`
+    );
+    setActiveVideo(response.data);
+  };
 
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const response = await axios.get(
-          `${apiBaseUrl}/videos/${videoId}?api_key=${apiKey}`
-        );
-        setActiveVideo(response.data);
+        const videoIdToFetch = videoId || (await fetchDefaultVideoId());
+        await fetchVideoById(videoIdToFetch);
       } catch (error) {
         console.error("Could not fetch video", error);
       }
@@ -28,12 +38,18 @@ function VideoDetailsPage() {
 
   return (
     <main>
-      <VideoPlayer activeVideo={activeVideo} />
-      <div className="layout-container">
-        <VideoDetails activeVideo={activeVideo} />
-        <CommentSection activeVideo={activeVideo} />
-        <VideoBank activeVideo={activeVideo} />
-      </div>
+      {activeVideo ? (
+        <>
+          <VideoPlayer activeVideo={activeVideo} />
+          <div className="layout-container">
+            <VideoDetails activeVideo={activeVideo} />
+            <CommentSection activeVideo={activeVideo} />
+            <VideoBank activeVideo={activeVideo} />
+          </div>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </main>
   );
 }
