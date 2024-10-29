@@ -1,5 +1,4 @@
 import "./CommentForm.scss";
-import Button from "../Button/Button";
 import Avatar from "../Avatar/Avatar";
 import userAvatar from "../../assets/images/Mohan-muruge.jpg";
 import commentIcon from "../../assets/images/icons/add_comment.svg";
@@ -24,11 +23,7 @@ function CommentForm() {
           placeholder="Add a new comment"
           className="comment-form__input comment-form__input--big"
         ></textarea>
-        <Button
-          nameOfClass="comment-form__button"
-          icon={commentIcon}
-          cta="COMMENT"
-        />
+        <button className="comment-form__button">COMMENT</button>
       </div>
     </form>
   );

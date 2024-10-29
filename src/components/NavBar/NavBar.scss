@@ -51,4 +51,9 @@
       order: 2;
     }
   }
+
+  &__upload {
+    background-image: url(../../assets/images/icons/upload.svg);
+    @include button;
+  }
 }

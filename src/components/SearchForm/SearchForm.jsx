@@ -1,8 +1,4 @@
 import "./SearchForm.scss";
-import Button from "../Button/Button";
-import Avatar from "../Avatar/Avatar";
-import userAvatar from "../../assets/images/Mohan-muruge.jpg";
-import uploadIcon from "../../assets/images/icons/upload.svg";
 
 function SearchForm() {
   const submitHandler = (event) => {
