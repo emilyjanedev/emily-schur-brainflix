@@ -1,11 +1,11 @@
 import "./SearchForm.scss";
 
 function SearchForm() {
-  const submitHandler = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
   };
   return (
-    <form action="submit" className="search-form" onSubmit={submitHandler}>
+    <form action="submit" className="search-form" onSubmit={handleSubmit}>
       <input
         type="text"
         name="query"
