@@ -4,7 +4,7 @@
 @use "../../styles/partials/mixins" as *;
 
 .comment-form {
-  @include flex-row(center, center, 1rem);
+  @include flex-row(center, flex-start);
   flex-wrap: wrap;
   padding: 1rem 0;
   border-bottom: 1.5px solid $secondary-medium;
@@ -15,29 +15,17 @@
 
   &__avatar {
     object-position: 20%;
-    position: relative;
-    bottom: 6.5rem;
-
-    @include tablet {
-      bottom: 0;
-      top: 0.75rem;
-    }
+    margin-right: 1rem;
   }
 
   &__input-wrapper {
     position: relative;
     flex-grow: 1;
-    @include flex-column(center, flex-start);
-
-    @include tablet {
-      @include flex-row(center, center);
-      flex-wrap: wrap;
-    }
+    @include flex-column(center, center, 1rem);
   }
 
   &__input {
     width: 100%;
-    margin-bottom: 1rem;
     @include input;
 
     &--big {
@@ -47,11 +35,7 @@
     }
 
     @include tablet {
-      height: 2.8125rem;
-      margin-bottom: 0;
-      width: auto;
       flex-grow: 1;
-      margin-right: 1.25rem;
     }
 
     &::-webkit-scrollbar {
@@ -63,9 +47,9 @@
     @include mobile-labels-buttons;
     font-weight: 600;
     color: $primary-medium;
-    margin-bottom: 0.25rem;
     width: 100%;
     padding-left: 4rem;
+    margin-bottom: 0.25rem;
 
     @include tablet {
       width: 100%;
@@ -76,5 +60,9 @@
   &__button {
     background-image: url(../../assets/images/icons/add_comment.svg);
     @include button;
+
+    @include tablet {
+      align-self: flex-end;
+    }
   }
 }
