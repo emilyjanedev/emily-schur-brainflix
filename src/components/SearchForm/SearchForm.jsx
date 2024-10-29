@@ -17,12 +17,6 @@ function SearchForm() {
         placeholder="Search"
         className="search-form__input"
       />
-      <Avatar src={userAvatar} nameOfClass="search-form__avatar" />
-      <Button
-        nameOfClass="search-form__button"
-        icon={uploadIcon}
-        cta="UPLOAD"
-      />
     </form>
   );
 }

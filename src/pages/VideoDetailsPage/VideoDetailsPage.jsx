@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { apiBaseUrl, apiKey } from "../../utils/api";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import videoData from "../../data/video-details.json";
 
 function VideoDetailsPage() {
   const { videoId } = useParams();

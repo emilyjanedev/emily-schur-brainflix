@@ -5,7 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { apiBaseUrl, apiKey } from "../../utils/api";
 
-function VideoBank({ activeVideo, changeActiveVideo }) {
+function VideoBank({ activeVideo }) {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -29,11 +29,7 @@ function VideoBank({ activeVideo, changeActiveVideo }) {
       <h2 className="video-bank__title">NEXT VIDEOS</h2>
       <ul className="video-list">
         {filteredList.map((video) => (
-          <Video
-            key={video.id}
-            video={video}
-            changeActiveVideo={changeActiveVideo}
-          />
+          <Video key={video.id} video={video} />
         ))}
       </ul>
     </section>
