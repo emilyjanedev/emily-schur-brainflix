@@ -16,7 +16,7 @@
   &__avatar {
     object-position: 20%;
     position: relative;
-    bottom: 3.625rem;
+    bottom: 6.5rem;
 
     @include tablet {
       bottom: 0;
@@ -25,6 +25,7 @@
   }
 
   &__input-wrapper {
+    position: relative;
     flex-grow: 1;
     @include flex-column(center, flex-start);
 
@@ -58,11 +59,13 @@
     }
   }
 
-  &__label {
+  &__title {
     @include mobile-labels-buttons;
     font-weight: 600;
     color: $primary-medium;
     margin-bottom: 0.25rem;
+    width: 100%;
+    padding-left: 4rem;
 
     @include tablet {
       width: 100%;
