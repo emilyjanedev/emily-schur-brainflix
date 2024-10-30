@@ -1,0 +1,33 @@
+@use "../../styles/partials/flexbox-kit" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/type-kit" as *;
+
+.upload-success-popup {
+  width: 70vw;
+  max-width: 29.375rem;
+  max-height: 12.5rem;
+  border: $divider;
+  border-radius: 4px;
+  background-color: $secondary-light;
+  @include flex-center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-content: center;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  padding: 2rem;
+  filter: drop-shadow(0 0 0.25rem $primary-dark);
+
+  &__title {
+    @include mobile-subheader;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__link {
+    @include button;
+  }
+}
