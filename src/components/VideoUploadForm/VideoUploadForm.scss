@@ -1,0 +1,49 @@
+@use "../../styles/partials/flexbox-kit" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/variables" as *;
+
+.video-upload-form {
+  @include flex-column(center, flex-start);
+  padding: 0 4vw;
+
+  &__input {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    @include input;
+
+    &--big {
+      & {
+        height: 7.5rem;
+      }
+    }
+  }
+
+  &__label {
+    @include mobile-labels-buttons;
+    color: $primary-medium;
+    margin-bottom: 0.25rem;
+  }
+
+  &__button {
+    background-image: url(../../assets/images/icons/publish.svg);
+    @include button;
+  }
+
+  &__cancel {
+    @include mobile-labels-buttons;
+    @include flex-center;
+    color: $brainflix-blue;
+    text-align: center;
+    width: 100%;
+    height: 6.25rem;
+
+    &:hover {
+      color: $brainflix-dark-blue;
+    }
+  }
+
+  &__thumbnail {
+    margin-bottom: 1.5rem;
+  }
+}
