@@ -7,7 +7,7 @@
   @include flex-row(center, flex-start);
   flex-wrap: wrap;
   padding: 1rem 0;
-  border-bottom: 1.5px solid $secondary-medium;
+  border-bottom: $divider;
 
   @include desktop {
     padding-right: 1.5rem;

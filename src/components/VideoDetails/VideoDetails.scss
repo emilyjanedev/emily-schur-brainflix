@@ -19,7 +19,7 @@
   &__title {
     @include mobile-page-header;
     padding: 1.25rem 0;
-    border-bottom: 1.5px solid $secondary-medium;
+    border-bottom: $divider;
 
     @include tablet {
       border-bottom-color: transparent;
@@ -32,7 +32,7 @@
     padding: 1rem 0;
     @include flex-row(space-between, center);
     flex-wrap: wrap;
-    border-bottom: 1.5px solid $secondary-medium;
+    border-bottom: $divider;
 
     @include tablet {
       padding-top: 0;

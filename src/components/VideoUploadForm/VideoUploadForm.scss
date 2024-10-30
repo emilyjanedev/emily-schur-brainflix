@@ -12,7 +12,7 @@
     flex-wrap: wrap;
     margin: 0 5vw;
     padding-top: 2rem;
-    border-top: 1.5px solid $secondary-medium;
+    border-top: $divider;
   }
 
   @include desktop {
@@ -83,7 +83,7 @@
     @include tablet {
       @include flex-row(flex-end, center, 3rem);
       padding-top: 2rem;
-      border-top: 1.5px solid $secondary-medium;
+      border-top: $divider;
     }
 
     @include desktop {

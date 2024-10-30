@@ -5,8 +5,7 @@
 .comment {
   @include flex-row(space-between, flex-start, 1rem);
   padding: 1rem 0;
-  border-bottom: 1.5px solid $secondary-medium;
-
+  border-bottom: $divider;
   @include tablet {
     padding: 1.5rem 0;
   }

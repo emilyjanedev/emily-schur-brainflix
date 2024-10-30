@@ -2,7 +2,7 @@
 @use "../../styles/partials/mixins" as *;
 
 .video-upload-page {
-  border-top: 1.5px solid $secondary-medium;
+  border-top: $divider;
 
   &__title {
     padding: 0 4vw;
