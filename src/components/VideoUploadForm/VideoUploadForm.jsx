@@ -19,11 +19,11 @@ function VideoUploadForm() {
   };
 
   const isVideoTitleValid = () => {
-    return videoTitle.length > 2 && videoTitle.length < 101;
+    return videoTitle.length > 1 && videoTitle.length < 101;
   };
 
   const isVideoDescriptionValid = () => {
-    return videoDescription.length > 2 && videoDescription.length < 101;
+    return videoDescription.length > 1 && videoDescription.length < 101;
   };
 
   const isFormValid = () => {
@@ -100,7 +100,7 @@ function VideoUploadForm() {
             />
             {titleErrorPresent ? (
               <p className="video-upload-form__error-message">
-                Title must be between 1-100 characters.
+                Title must be between 2-100 characters.
               </p>
             ) : (
               <></>
@@ -125,7 +125,7 @@ function VideoUploadForm() {
             ></textarea>
             {descriptionErrorPresent ? (
               <p className="video-upload-form__error-message">
-                Description must be between 1-5000 characters.
+                Description must be between 2-5000 characters.
               </p>
             ) : (
               <></>

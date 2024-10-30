@@ -3,14 +3,17 @@ import { Link } from "react-router-dom";
 
 function UploadSuccessPopup() {
   return (
-    <article className="upload-success-popup">
-      <h2 className="upload-success-popup__title">
-        Video Succesfully Uploaded!
-      </h2>
-      <Link to="/" className="upload-success-popup__link">
-        OK
-      </Link>
-    </article>
+    <>
+      <article className="upload-success-popup">
+        <h2 className="upload-success-popup__title">
+          Video Succesfully Uploaded!
+        </h2>
+        <Link to="/" className="upload-success-popup__link">
+          OK
+        </Link>
+      </article>
+      <div className="upload-success-popup__screen"></div>
+    </>
   );
 }
 
