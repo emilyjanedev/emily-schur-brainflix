@@ -47,6 +47,10 @@
     margin-bottom: 1.5rem;
     @include input;
 
+    &--error {
+      border: 2px solid #d22d2d;
+    }
+
     @include tablet {
       margin-bottom: 2rem;
     }
@@ -60,6 +64,16 @@
         height: 7.5rem;
       }
     }
+  }
+
+  &__error-wrapper {
+    position: relative;
+  }
+
+  &__error-message {
+    color: #d22d2d;
+    position: absolute;
+    bottom: 0.5rem;
   }
 
   &__label {

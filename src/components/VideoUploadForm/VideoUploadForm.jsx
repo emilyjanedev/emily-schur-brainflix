@@ -1,16 +1,83 @@
 import "./VideoUploadForm.scss";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import videoThumbnail from "../../assets/images/Upload-video-preview.jpg";
 
 function VideoUploadForm() {
+  const [videoTitle, setVideoTitle] = useState("");
+  const [videoDescription, setVideoDescription] = useState("");
+  const [titleErrorPresent, setTitleErrorPresent] = useState(false);
+  const [descriptionErrorPresent, setDescriptionErrorPresent] = useState(false);
+
+  const handleVideoTitleChange = (event) => {
+    setVideoTitle(event.target.value);
+  };
+
+  const handleVideoDescriptionChange = (event) => {
+    setVideoDescription(event.target.value);
+  };
+
+  const isVideoTitleValid = () => {
+    return videoTitle.length > 2 && videoTitle.length < 101;
+  };
+
+  const isVideoDescriptionValid = () => {
+    return videoDescription.length > 2 && videoDescription.length < 101;
+  };
+
+  const isFormValid = () => {
+    if (!videoTitle || !videoDescription) {
+      return false;
+    }
+
+    if (!isVideoTitleValid()) {
+      return false;
+    }
+
+    if (!isVideoDescriptionValid()) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const resetErrors = () => {
+    setTitleErrorPresent(false);
+    setDescriptionErrorPresent(false);
+  };
+
+  const applyErrors = () => {
+    if (!isVideoTitleValid()) {
+      setTitleErrorPresent(true);
+    }
+
+    if (!isVideoDescriptionValid()) {
+      setDescriptionErrorPresent(true);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (isFormValid()) {
+      setVideoTitle("");
+      setVideoDescription("");
+      resetErrors();
+      alert("Video Uploaded!");
+    } else {
+      resetErrors();
+      applyErrors();
+      alert("Video Upload Failed, please check your form for errors.");
+    }
+  };
+
   return (
-    <form className="video-upload-form">
+    <form className="video-upload-form" onSubmit={handleSubmit}>
       <div className="video-upload-form__image-wrapper">
         <p className="video-upload-form__label">VIDEO THUMBNAIL</p>
         <img
           src={videoThumbnail}
-          alt="sprinter at the starting line in blocks with a batton in hand"
+          alt="video thumbnail"
           className="video-upload-form__thumbnail"
         />
       </div>
@@ -18,22 +85,51 @@ function VideoUploadForm() {
         <label htmlFor="videoTitle" className="video-upload-form__label">
           TITLE YOUR VIDEO
         </label>
-        <input
-          type="text"
-          name="videoTitle"
-          id="videoTitle"
-          className="video-upload-form__input"
-          placeholder="Add a title to your video"
-        />
-        <label htmlFor="videoDescription" className="video-upload-form__label">
-          ADD A VIDEO DESCRIPTION
-        </label>
-        <textarea
-          name="videoDescription"
-          id="videoDescription"
-          className="video-upload-form__input video-upload-form__input--big"
-          placeholder="Add a description to your video"
-        ></textarea>
+        <div className="video-upload-form__error-wrapper">
+          <input
+            type="text"
+            name="videoTitle"
+            id="videoTitle"
+            className={`video-upload-form__input ${
+              titleErrorPresent ? "video-upload-form__input--error" : ""
+            }`}
+            placeholder="Add a title to your video"
+            value={videoTitle}
+            onChange={handleVideoTitleChange}
+          />
+          {titleErrorPresent ? (
+            <p className="video-upload-form__error-message">
+              Title must be between 1-100 characters.
+            </p>
+          ) : (
+            <></>
+          )}
+        </div>
+        <div className="video-upload-form__error-wrapper">
+          <label
+            htmlFor="videoDescription"
+            className="video-upload-form__label"
+          >
+            ADD A VIDEO DESCRIPTION
+          </label>
+          <textarea
+            name="videoDescription"
+            id="videoDescription"
+            className={`video-upload-form__input video-upload-form__input--big ${
+              descriptionErrorPresent ? "video-upload-form__input--error" : ""
+            }`}
+            placeholder="Add a description to your video"
+            value={videoDescription}
+            onChange={handleVideoDescriptionChange}
+          ></textarea>
+          {descriptionErrorPresent ? (
+            <p className="video-upload-form__error-message">
+              Description must be between 1-5000 characters.
+            </p>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
       <div className="video-upload-form__button-wrapper">
         <button className="video-upload-form__button">PUBLISH</button>
