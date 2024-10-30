@@ -1,10 +1,11 @@
 @use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
 
 .comment-section {
-  padding: 0 4vw;
+  padding: $mobile-padding;
 
   @include tablet {
-    padding: 0 5vw;
+    padding: $tablet-padding;
   }
 
   @include desktop {

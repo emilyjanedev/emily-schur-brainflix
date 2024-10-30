@@ -4,11 +4,15 @@
 @use "../../styles/partials/mixins" as *;
 
 .video-bank {
-  padding: 1rem 4vw;
+  padding: $mobile-padding;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
   @include tablet {
     width: 50%;
-    padding: 1.5rem 5vw;
+    padding: $tablet-padding;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 
   @include desktop {

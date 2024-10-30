@@ -1,16 +1,17 @@
 @use "../../styles/partials/flexbox-kit" as *;
 @use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
 
 .nav-bar {
   @include flex-column(center, center);
   flex-wrap: wrap;
-  padding: 0 4vw;
+  padding: $mobile-padding;
 
   @include tablet {
     width: 100%;
     @include flex-row(space-between, center);
     flex-wrap: nowrap;
-    padding: 0 5vw;
+    padding: $tablet-padding;
   }
 
   &__content {
@@ -35,7 +36,7 @@
     max-width: 11.5625rem;
     margin-top: 1rem;
     line-height: 1;
-    width: 100vw;
+    width: 100%;
 
     @include tablet {
       max-width: 8.125rem;

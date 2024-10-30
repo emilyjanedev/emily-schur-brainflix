@@ -5,15 +5,15 @@
   border-top: $divider;
 
   &__title {
-    padding: 0 4vw;
+    padding: $mobile-padding;
     margin: 1.5rem 0;
 
     @include tablet {
-      padding: 0 5vw;
+      padding: $tablet-padding;
     }
 
     @include desktop {
-      padding: 0 10vw;
+      padding: $desktop-padding;
     }
   }
 }
