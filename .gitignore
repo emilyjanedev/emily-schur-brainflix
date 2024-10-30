@@ -24,6 +24,3 @@ dist-ssr
 *.sw?
 .env
 
-eslint.config.js
-vite.config.js
-package-lock.json
