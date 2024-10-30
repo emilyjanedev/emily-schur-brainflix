@@ -25,7 +25,7 @@
     width: 100%;
 
     @include desktop {
-      width: 60%;
+      width: 55%;
       flex-grow: 1;
     }
   }
@@ -112,7 +112,7 @@
     }
 
     @include desktop {
-      padding-top: 1.5rem;
+      padding: 1.5rem 0;
     }
   }
 
@@ -140,8 +140,5 @@
 
   &__thumbnail {
     margin-bottom: 1.5rem;
-
-    @include tablet {
-    }
   }
 }
