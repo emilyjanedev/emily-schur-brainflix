@@ -22,7 +22,7 @@ function VideoBank({ videoList, activeVideoId }) {
 
 VideoBank.propTypes = {
   activeVideoId: PropTypes.string.isRequired,
-  videoList: PropTypes.object.isRequired,
+  videoList: PropTypes.array.isRequired,
 };
 
 export default VideoBank;

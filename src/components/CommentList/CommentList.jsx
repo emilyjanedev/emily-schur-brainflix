@@ -2,9 +2,7 @@ import "./CommentList.scss";
 import Comment from "../Comment/Comment";
 import PropTypes from "prop-types";
 
-function CommentList({ activeVideo }) {
-  const { comments } = activeVideo;
-
+function CommentList({ comments }) {
   return (
     <ul className="comment-list">
       {comments.map((comment) => (
@@ -15,7 +13,7 @@ function CommentList({ activeVideo }) {
 }
 
 CommentList.propTypes = {
-  activeVideo: PropTypes.object.isRequired,
+  comments: PropTypes.array.isRequired,
 };
 
 export default CommentList;

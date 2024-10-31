@@ -63,7 +63,7 @@ function VideoDetailsPage() {
           <VideoPlayer activeVideo={activeVideo} />
           <div className="layout-container">
             <VideoDetails activeVideo={activeVideo} />
-            <CommentSection activeVideo={activeVideo} />
+            <CommentSection comments={activeVideo.comments} />
             <VideoBank videoList={videoList} activeVideoId={activeVideo.id} />
           </div>
         </>
