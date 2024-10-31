@@ -5,27 +5,46 @@ function NotFoundPage() {
   const { "*": params } = useParams();
   const url = window.location.href;
   const baseUrl = url.slice(0, url.lastIndexOf("/"));
+  console.log(baseUrl);
 
-  const routes = [
-    { name: "home", path: "/" },
-    { name: "upload", path: "/upload" },
-  ];
   let routeSuggestion = null;
 
   const suggestRoute = (userRoute) => {
+    const routes = [
+      { name: "home", path: "/" },
+      { name: "upload", path: "/upload" },
+    ];
+
+    const cleanedUserRoute = userRoute.toLowerCase();
+
     for (const route of routes) {
       if (
-        userRoute.toLowerCase().includes(route.name) ||
-        route.name.includes(userRoute.toLowerCase())
+        cleanedUserRoute.includes(route.name) ||
+        route.name.includes(cleanedUserRoute)
       ) {
         routeSuggestion = route;
-        return;
+        break;
       }
     }
+
+    if (!routeSuggestion) {
+      for (const route of routes) {
+        let count = 0;
+        for (const letter of cleanedUserRoute) {
+          if (route.name.includes(letter)) count++;
+        }
+        if (count > 3) {
+          routeSuggestion = route;
+          break;
+        }
+      }
+    }
+
+    return routeSuggestion;
   };
 
   suggestRoute(params);
-  const pageName = "Home";
+
   return (
     <section className="not-found-page">
       <h1 className="not-found-page__title">404</h1>
@@ -34,7 +53,7 @@ function NotFoundPage() {
         <p className="not-found-page__message">
           Did you mean{" "}
           <Link to={routeSuggestion.path} className="not-found-page__link">
-            {`${baseUrl}/${routeSuggestion.name}`}
+            {`${baseUrl}${routeSuggestion.path}`}
           </Link>
           ?
         </p>
