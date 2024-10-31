@@ -1,6 +1,5 @@
 import "./VideoPlayer.scss";
 import PropTypes from "prop-types";
-import { apiKey } from "../../utils/api";
 
 function VideoPlayer({ activeVideo }) {
   const { video: src, image } = activeVideo;
@@ -9,7 +8,7 @@ function VideoPlayer({ activeVideo }) {
     <video
       controls
       key={src}
-      src={`${src}?api_key=${apiKey}`}
+      src={{ src }}
       poster={image}
       className="current-video"
     >

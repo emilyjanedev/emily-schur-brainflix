@@ -4,12 +4,12 @@
 @use "../../styles/partials/flexbox-kit" as *;
 
 .loading-screen {
-  color: $secondary-medium;
-  font-size: 2rem;
-  font-weight: 600;
-  padding: 4rem 0;
+  @include flex-center;
 
-  &__wrapper {
-    @include flex-center;
+  &__title {
+    color: $secondary-medium;
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 4rem 0;
   }
 }

@@ -1,0 +1,18 @@
+@use "../../styles/partials/flexbox-kit" as *;
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/variables" as *;
+
+.not-found-page {
+  @include flex-column(flex-start);
+  gap: 1rem;
+  padding: 4vw;
+
+  &__title {
+    font-size: 3rem;
+    color: $brainflix-blue;
+  }
+
+  &__link {
+    color: $brainflix-dark-blue;
+  }
+}

@@ -3,8 +3,8 @@ import React from "react";
 
 function LoadingScreen() {
   return (
-    <div className="loading-screen__wrapper">
-      <p className="loading-screen">Loading...</p>
+    <div className="loading-screen">
+      <p className="loading-screen__title">Loading...</p>
     </div>
   );
 }

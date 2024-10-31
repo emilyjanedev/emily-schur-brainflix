@@ -7,7 +7,6 @@
   width: 70vw;
   max-width: 29.375rem;
   max-height: 12.5rem;
-  border: $divider;
   border-radius: 4px;
   background-color: $secondary-light;
   @include flex-center;
@@ -20,7 +19,6 @@
   top: 50%;
   left: 50%;
   padding: 2rem;
-  filter: drop-shadow(0 0 0.25rem $primary-dark);
 
   &__title {
     @include mobile-subheader;
