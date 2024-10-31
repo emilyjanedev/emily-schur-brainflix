@@ -2,10 +2,8 @@ import "./CommentForm.scss";
 import Avatar from "../Avatar/Avatar";
 import userAvatar from "../../assets/images/Mohan-muruge.jpg";
 import commentIcon from "../../assets/images/icons/add_comment.svg";
-import { Navigate, useNavigate } from "react-router-dom";
 
 function CommentForm() {
-  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
   };

@@ -5,10 +5,8 @@ function NotFoundPage() {
   const { "*": params } = useParams();
   const url = window.location.href;
   const baseUrl = url.slice(0, url.lastIndexOf("/"));
-  console.log(baseUrl);
 
   let routeSuggestion = null;
-
   const suggestRoute = (userRoute) => {
     const routes = [
       { name: "home", path: "/" },
@@ -43,12 +41,17 @@ function NotFoundPage() {
     return routeSuggestion;
   };
 
-  suggestRoute(params);
+  if (params) {
+    suggestRoute(params);
+  }
 
   return (
     <section className="not-found-page">
       <h1 className="not-found-page__title">404</h1>
       <p className="not-found-page__message">Page not found.</p>
+      {!params && (
+        <p className="not-found-page__message">That video does not exist.</p>
+      )}
       {routeSuggestion && (
         <p className="not-found-page__message">
           Did you mean{" "}
