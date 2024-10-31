@@ -3,10 +3,10 @@ import CommentForm from "../CommentForm/CommentForm";
 import PropTypes from "prop-types";
 import CommentList from "../CommentList/CommentList";
 
-function CommentSection({ comments }) {
+function CommentSection({ comments, handleAddComment }) {
   return (
     <section className="comment-section">
-      <CommentForm />
+      <CommentForm handleAddComment={handleAddComment} />
       <CommentList comments={comments} />
     </section>
   );
@@ -14,6 +14,7 @@ function CommentSection({ comments }) {
 
 CommentSection.propTypes = {
   comments: PropTypes.array.isRequired,
+  handleAddComment: PropTypes.func.isRequired,
 };
 
 export default CommentSection;

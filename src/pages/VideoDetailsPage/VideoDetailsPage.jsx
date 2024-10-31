@@ -14,6 +14,7 @@ function VideoDetailsPage() {
   const [activeVideo, setActiveVideo] = useState(null);
   const [videoList, setVideoList] = useState([]);
   const [notFound, setNotFound] = useState(false);
+  const [comments, setComments] = useState([]);
 
   const fetchVideos = async () => {
     try {
@@ -23,6 +24,17 @@ function VideoDetailsPage() {
       return response.data;
     } catch (error) {
       console.error("Could not fetch videos", error);
+    }
+  };
+
+  const fetchComments = async (activeVideoId) => {
+    try {
+      const { data } = await axios.get(
+        `${apiBaseUrl}/videos/${activeVideo.id}?api_key=${apiKey}`
+      );
+      setComments(data.comments.sort((a, b) => b.timestamp - a.timestamp));
+    } catch (error) {
+      console.error("Could not get comments", error);
     }
   };
 
@@ -53,10 +65,6 @@ function VideoDetailsPage() {
     loadVideos();
   }, []);
 
-  if (notFound) {
-    return <Navigate to="/page-not-found" />;
-  }
-
   useEffect(() => {
     const fetchActiveVideo = async () => {
       try {
@@ -69,6 +77,28 @@ function VideoDetailsPage() {
     fetchActiveVideo();
   }, [videoId]);
 
+  useEffect(() => {
+    if (activeVideo) {
+      fetchComments(activeVideo.id);
+    }
+  }, [activeVideo]);
+
+  const handleAddComment = async (newComment) => {
+    try {
+      await axios.post(
+        `${apiBaseUrl}/videos/${activeVideo.id}/comments?api_key=${apiKey}`,
+        newComment
+      );
+      fetchComments(activeVideo.id);
+    } catch (error) {
+      console.error("Could not post comment", error);
+    }
+  };
+
+  if (notFound) {
+    return <Navigate to="/page-not-found" />;
+  }
+
   return (
     <main>
       {activeVideo ? (
@@ -76,7 +106,10 @@ function VideoDetailsPage() {
           <VideoPlayer activeVideo={activeVideo} />
           <div className="layout-container">
             <VideoDetails activeVideo={activeVideo} />
-            <CommentSection comments={activeVideo.comments} />
+            <CommentSection
+              comments={comments}
+              handleAddComment={handleAddComment}
+            />
             <VideoBank videoList={videoList} activeVideoId={activeVideo.id} />
           </div>
         </>
