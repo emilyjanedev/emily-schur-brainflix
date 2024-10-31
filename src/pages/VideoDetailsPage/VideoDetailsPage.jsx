@@ -8,7 +8,6 @@ import { apiBaseUrl, apiKey } from "../../utils/api";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
-import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function VideoDetailsPage() {
   const { videoId } = useParams();
