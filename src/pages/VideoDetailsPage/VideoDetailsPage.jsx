@@ -11,10 +11,22 @@ import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 function VideoDetailsPage() {
   const { videoId } = useParams();
   const [activeVideo, setActiveVideo] = useState(null);
+  const [videoList, setVideoList] = useState([]);
+
+  const fetchVideos = async () => {
+    try {
+      const response = await axios.get(
+        `${apiBaseUrl}/videos?api_key=${apiKey}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Could not fetch videos", error);
+    }
+  };
 
   const fetchDefaultVideoId = async () => {
-    const response = await axios.get(`${apiBaseUrl}/videos?api_key=${apiKey}`);
-    return response.data[0].id;
+    const videoList = await fetchVideos();
+    return videoList[0].id;
   };
 
   const fetchVideoById = async (id) => {
@@ -36,6 +48,14 @@ function VideoDetailsPage() {
     fetchVideo();
   }, [videoId]);
 
+  useEffect(() => {
+    const loadVideos = async () => {
+      const videos = await fetchVideos();
+      setVideoList(videos);
+    };
+    loadVideos();
+  }, []);
+
   return (
     <main>
       {activeVideo ? (
@@ -44,7 +64,7 @@ function VideoDetailsPage() {
           <div className="layout-container">
             <VideoDetails activeVideo={activeVideo} />
             <CommentSection activeVideo={activeVideo} />
-            <VideoBank activeVideo={activeVideo} />
+            <VideoBank videoList={videoList} activeVideoId={activeVideo.id} />
           </div>
         </>
       ) : (

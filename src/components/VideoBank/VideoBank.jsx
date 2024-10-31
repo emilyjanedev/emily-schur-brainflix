@@ -5,24 +5,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { apiBaseUrl, apiKey } from "../../utils/api";
 
-function VideoBank({ activeVideo }) {
-  const [videos, setVideos] = useState([]);
-
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const response = await axios.get(
-          `${apiBaseUrl}/videos?api_key=${apiKey}`
-        );
-        setVideos(response.data);
-      } catch (error) {
-        console.error("Could not fetch videos", error);
-      }
-    };
-    fetchVideos();
-  }, []);
-
-  const filteredList = videos.filter((video) => video.id !== activeVideo.id);
+function VideoBank({ videoList, activeVideoId }) {
+  const filteredList = videoList.filter((video) => video.id !== activeVideoId);
 
   return (
     <section className="video-bank">
@@ -37,7 +21,8 @@ function VideoBank({ activeVideo }) {
 }
 
 VideoBank.propTypes = {
-  activeVideo: PropTypes.object.isRequired,
+  activeVideoId: PropTypes.string.isRequired,
+  videoList: PropTypes.object.isRequired,
 };
 
 export default VideoBank;
