@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { apiBaseUrl, apiKey } from "../../utils/api";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 
 function VideoDetailsPage() {
   const { videoId } = useParams();
@@ -47,7 +48,7 @@ function VideoDetailsPage() {
           </div>
         </>
       ) : (
-        <p>Loading...</p>
+        <LoadingScreen />
       )}
     </main>
   );

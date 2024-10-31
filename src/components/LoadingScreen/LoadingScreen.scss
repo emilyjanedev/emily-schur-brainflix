@@ -1,0 +1,15 @@
+@use "../../styles/partials/type-kit" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/flexbox-kit" as *;
+
+.loading-screen {
+  color: $secondary-medium;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 4rem 0;
+
+  &__wrapper {
+    @include flex-center;
+  }
+}
