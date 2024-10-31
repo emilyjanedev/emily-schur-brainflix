@@ -2,12 +2,12 @@ import CommentSection from "../../components/CommentSection/CommentSection";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import VideoDetails from "../../components/VideoDetails/VideoDetails";
 import VideoBank from "../../components/VideoBank/VideoBank";
+import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { apiBaseUrl, apiKey } from "../../utils/api";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 
 function VideoDetailsPage() {
   const { videoId } = useParams();
@@ -46,18 +46,6 @@ function VideoDetailsPage() {
   };
 
   useEffect(() => {
-    const fetchVideo = async () => {
-      try {
-        const videoIdToFetch = videoId || (await fetchDefaultVideoId());
-        await fetchVideoById(videoIdToFetch);
-      } catch (error) {
-        console.error("Could not fetch video", error);
-      }
-    };
-    fetchVideo();
-  }, [videoId]);
-
-  useEffect(() => {
     const loadVideos = async () => {
       const videos = await fetchVideos();
       setVideoList(videos);
@@ -68,6 +56,18 @@ function VideoDetailsPage() {
   if (notFound) {
     return <Navigate to="/page-not-found" />;
   }
+
+  useEffect(() => {
+    const fetchActiveVideo = async () => {
+      try {
+        const videoIdToFetch = videoId || (await fetchDefaultVideoId());
+        await fetchVideoById(videoIdToFetch);
+      } catch (error) {
+        console.error("Could not fetch video", error);
+      }
+    };
+    fetchActiveVideo();
+  }, [videoId]);
 
   return (
     <main>
