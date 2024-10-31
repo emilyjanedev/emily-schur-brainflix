@@ -33,7 +33,7 @@ function NotFoundPage() {
         for (const letter of cleanedUserRoute) {
           if (route.name.includes(letter)) count++;
         }
-        if (count > 3) {
+        if (count >= route.name.length / 2) {
           routeSuggestion = route;
           break;
         }
