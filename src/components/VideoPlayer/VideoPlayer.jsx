@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 
 function VideoPlayer({ activeVideo }) {
   const { video: src, image } = activeVideo;
+  console.log(typeof src);
 
   return (
     <video
       controls
       key={src}
-      src={{ src }}
+      src={src}
       poster={image}
       className="current-video"
     >
