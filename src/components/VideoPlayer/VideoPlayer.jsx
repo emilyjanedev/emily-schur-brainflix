@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 function VideoPlayer({ activeVideo }) {
   const { video: src, image } = activeVideo;
-  console.log(typeof src);
 
   return (
     <video
