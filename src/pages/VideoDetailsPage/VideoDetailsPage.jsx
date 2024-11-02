@@ -27,7 +27,7 @@ function VideoDetailsPage() {
     }
   };
 
-  const fetchComments = async (activeVideoId) => {
+  const fetchComments = async () => {
     try {
       const { data } = await axios.get(
         `${apiBaseUrl}/videos/${activeVideo.id}?api_key=${apiKey}`

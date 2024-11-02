@@ -5,69 +5,55 @@ import videoThumbnail from "../../assets/images/Upload-video-preview.jpg";
 import UploadSuccessPopup from "../UploadSuccessPopup/UploadSuccessPopup";
 
 function VideoUploadForm() {
-  const [videoTitle, setVideoTitle] = useState("");
-  const [videoDescription, setVideoDescription] = useState("");
-  const [titleErrorPresent, setTitleErrorPresent] = useState(false);
-  const [descriptionErrorPresent, setDescriptionErrorPresent] = useState(false);
+  const [newVideo, setNewVideo] = useState({
+    videoTitle: "",
+    videoDescription: "",
+  });
+  const [errorMessages, setErrorMessages] = useState({});
   const [popupVisibility, setPopupVisibility] = useState(false);
-  const handleVideoTitleChange = (event) => {
-    setVideoTitle(event.target.value);
-  };
 
-  const handleVideoDescriptionChange = (event) => {
-    setVideoDescription(event.target.value);
+  const handleFieldChange = (event) => {
+    const { name, value } = event.target;
+    setNewVideo((prevVideo) => ({ ...prevVideo, [name]: value }));
   };
 
   const isVideoTitleValid = () => {
-    return videoTitle.length > 1 && videoTitle.length < 101;
+    return newVideo.videoTitle.length > 1 && newVideo.videoTitle.length < 101;
   };
 
   const isVideoDescriptionValid = () => {
-    return videoDescription.length > 1 && videoDescription.length < 101;
+    return (
+      newVideo.videoDescription.length > 1 &&
+      newVideo.videoDescription.length < 101
+    );
   };
 
   const isFormValid = () => {
-    if (!videoTitle || !videoDescription) {
+    let errors = {};
+    if (!newVideo.videoTitle || !newVideo.videoDescription) {
       return false;
     }
 
     if (!isVideoTitleValid()) {
-      return false;
+      errors.videoTitle = "Title must be between 2-100 characters.";
     }
 
     if (!isVideoDescriptionValid()) {
-      return false;
+      errors.videoDescription =
+        "Description must be between 2-5000 characters.";
     }
 
-    return true;
-  };
-
-  const resetErrors = () => {
-    setTitleErrorPresent(false);
-    setDescriptionErrorPresent(false);
-  };
-
-  const applyErrors = () => {
-    if (!isVideoTitleValid()) {
-      setTitleErrorPresent(true);
-    }
-
-    if (!isVideoDescriptionValid()) {
-      setDescriptionErrorPresent(true);
-    }
+    setErrorMessages(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (isFormValid()) {
-      setVideoTitle("");
-      setVideoDescription("");
-      resetErrors();
+      setNewVideo({ videoTitle: "", videoDescription: "" });
+      setErrorMessages({});
       setPopupVisibility(true);
-    } else {
-      resetErrors();
-      applyErrors();
     }
   };
 
@@ -92,15 +78,17 @@ function VideoUploadForm() {
               name="videoTitle"
               id="videoTitle"
               className={`video-upload-form__input ${
-                titleErrorPresent ? "video-upload-form__input--error" : ""
+                errorMessages.videoTitle
+                  ? "video-upload-form__input--error"
+                  : ""
               }`}
               placeholder="Add a title to your video"
-              value={videoTitle}
-              onChange={handleVideoTitleChange}
+              value={newVideo.videoTitle}
+              onChange={handleFieldChange}
             />
-            {titleErrorPresent ? (
+            {errorMessages.videoTitle ? (
               <p className="video-upload-form__error-message">
-                Title must be between 2-100 characters.
+                {errorMessages.videoTitle}
               </p>
             ) : (
               <></>
@@ -117,15 +105,17 @@ function VideoUploadForm() {
               name="videoDescription"
               id="videoDescription"
               className={`video-upload-form__input video-upload-form__input--big ${
-                descriptionErrorPresent ? "video-upload-form__input--error" : ""
+                errorMessages.videoDescription
+                  ? "video-upload-form__input--error"
+                  : ""
               }`}
               placeholder="Add a description to your video"
-              value={videoDescription}
-              onChange={handleVideoDescriptionChange}
+              value={newVideo.videoDescription}
+              onChange={handleFieldChange}
             ></textarea>
-            {descriptionErrorPresent ? (
+            {errorMessages.videoDescription ? (
               <p className="video-upload-form__error-message">
-                Description must be between 2-5000 characters.
+                {errorMessages.videoDescription}
               </p>
             ) : (
               <></>
