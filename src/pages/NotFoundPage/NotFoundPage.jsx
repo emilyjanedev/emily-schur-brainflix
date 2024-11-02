@@ -1,10 +1,10 @@
 import "./NotFoundPage.scss";
 import { Link, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function NotFoundPage() {
   const { "*": params } = useParams();
-  const url = window.location.href;
-  const baseUrl = url.slice(0, url.lastIndexOf("/"));
+  const baseUrl = window.location.origin;
 
   let routeSuggestion = null;
   const suggestRoute = (userRoute) => {
