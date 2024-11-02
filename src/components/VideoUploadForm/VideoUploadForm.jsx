@@ -1,5 +1,5 @@
 import "./VideoUploadForm.scss";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import videoThumbnail from "../../assets/images/Upload-video-preview.jpg";
 import UploadSuccessPopup from "../UploadSuccessPopup/UploadSuccessPopup";

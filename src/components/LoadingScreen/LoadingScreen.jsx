@@ -1,5 +1,4 @@
 import "./LoadingScreen.scss";
-import React from "react";
 
 function LoadingScreen() {
   return (

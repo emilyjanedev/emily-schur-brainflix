@@ -23,7 +23,7 @@ function VideoDetailsPage() {
       setVideoList(videos);
     };
     loadVideoList();
-  }, []);
+  }, [brainflixApi]);
 
   useEffect(() => {
     const loadActiveVideo = async () => {
@@ -36,7 +36,7 @@ function VideoDetailsPage() {
       }
     };
     loadActiveVideo();
-  }, [videoId]);
+  }, [videoId, brainflixApi]);
 
   useEffect(() => {
     const loadComments = async () => {
@@ -45,7 +45,7 @@ function VideoDetailsPage() {
       }
     };
     loadComments();
-  }, [activeVideo]);
+  }, [activeVideo, brainflixApi]);
 
   const handleCommentUpdate = async (commentRequest) => {
     if (commentRequest.action === "post") {
