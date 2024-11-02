@@ -28,8 +28,13 @@ function VideoDetailsPage() {
 
   useEffect(() => {
     const loadActiveVideo = async () => {
-      const videoIdToFetch = videoId || (await brainflixApi.getVideoId(0));
-      setActiveVideo(await brainflixApi.getVideoById(videoIdToFetch));
+      try {
+        const videoIdToFetch = videoId || (await brainflixApi.getVideoId(0));
+        setActiveVideo(await brainflixApi.getVideoById(videoIdToFetch));
+      } catch (error) {
+        console.error("Video does not exist", error);
+        setNotFound(true);
+      }
     };
     loadActiveVideo();
   }, [videoId]);
