@@ -11,10 +11,10 @@ import axios from "axios";
 
 function VideoDetailsPage() {
   const { videoId } = useParams();
-  const [activeVideo, setActiveVideo] = useState(null);
   const [videoList, setVideoList] = useState([]);
-  const [notFound, setNotFound] = useState(false);
+  const [activeVideo, setActiveVideo] = useState(null);
   const [comments, setComments] = useState([]);
+  const [notFound, setNotFound] = useState(false);
 
   const fetchVideos = async () => {
     try {
