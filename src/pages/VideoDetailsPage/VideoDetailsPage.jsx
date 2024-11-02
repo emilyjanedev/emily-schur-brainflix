@@ -83,12 +83,21 @@ function VideoDetailsPage() {
     }
   }, [activeVideo]);
 
-  const handleAddComment = async (newComment) => {
+  const handleCommentUpdate = async (newComment, action) => {
     try {
-      await axios.post(
-        `${apiBaseUrl}/videos/${activeVideo.id}/comments?api_key=${apiKey}`,
-        newComment
-      );
+      if (action === "post") {
+        await axios.post(
+          `${apiBaseUrl}/videos/${activeVideo.id}/comments?api_key=${apiKey}`,
+          newComment
+        );
+      }
+
+      if (action === "delete") {
+        await axios.delete(
+          `${apiBaseUrl}/videos/${activeVideo.id}/comments?api_key=${apiKey}`,
+          newComment
+        );
+      }
       fetchComments(activeVideo.id);
     } catch (error) {
       console.error("Could not post comment", error);
@@ -108,7 +117,7 @@ function VideoDetailsPage() {
             <VideoDetails activeVideo={activeVideo} />
             <CommentSection
               comments={comments}
-              handleAddComment={handleAddComment}
+              handleCommentUpdate={handleCommentUpdate}
             />
             <VideoBank videoList={videoList} activeVideoId={activeVideo.id} />
           </div>

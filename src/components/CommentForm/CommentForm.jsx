@@ -4,7 +4,7 @@ import userAvatar from "../../assets/images/Mohan-muruge.jpg";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-function CommentForm({ handleAddComment }) {
+function CommentForm({ handleCommentUpdate }) {
   const [newComment, setNewComment] = useState({ name: "", comment: "" });
   const [errorMessages, setErrorMessages] = useState({});
 
@@ -42,14 +42,14 @@ function CommentForm({ handleAddComment }) {
     }
 
     setErrorMessages(errors);
-    return Object.keys.length === 0;
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (isFormValid()) {
-      handleAddComment(newComment);
+      handleCommentUpdate(newComment, "post");
       setNewComment({ name: "", comment: "" });
       setErrorMessages({});
     }
@@ -106,7 +106,7 @@ function CommentForm({ handleAddComment }) {
 export default CommentForm;
 
 CommentForm.propTypes = {
-  handleAddComment: PropTypes.func.isRequired,
+  handleCommentUpdate: PropTypes.func.isRequired,
 };
 
 // Create State for each form entry
