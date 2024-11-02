@@ -49,7 +49,7 @@ function CommentForm({ handleCommentUpdate }) {
     event.preventDefault();
 
     if (isFormValid()) {
-      handleCommentUpdate(newComment, "post");
+      handleCommentUpdate({ action: "post", newComment: newComment });
       setNewComment({ name: "", comment: "" });
       setErrorMessages({});
     }

@@ -83,24 +83,23 @@ function VideoDetailsPage() {
     }
   }, [activeVideo]);
 
-  const handleCommentUpdate = async (newComment, action) => {
+  const handleCommentUpdate = async (commentRequest) => {
     try {
-      if (action === "post") {
+      if (commentRequest.action === "post") {
         await axios.post(
           `${apiBaseUrl}/videos/${activeVideo.id}/comments?api_key=${apiKey}`,
-          newComment
+          commentRequest.newComment
         );
       }
 
-      if (action === "delete") {
+      if (commentRequest.action === "delete") {
         await axios.delete(
-          `${apiBaseUrl}/videos/${activeVideo.id}/comments?api_key=${apiKey}`,
-          newComment
+          `${apiBaseUrl}/videos/${activeVideo.id}/comments/${commentRequest.commentId}?api_key=${apiKey}`
         );
       }
       fetchComments(activeVideo.id);
     } catch (error) {
-      console.error("Could not post comment", error);
+      console.error("Could not complete request", error);
     }
   };
 

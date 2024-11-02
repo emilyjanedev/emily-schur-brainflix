@@ -7,7 +7,10 @@ function CommentSection({ comments, handleCommentUpdate }) {
   return (
     <section className="comment-section">
       <CommentForm handleCommentUpdate={handleCommentUpdate} />
-      <CommentList comments={comments} />
+      <CommentList
+        comments={comments}
+        handleCommentUpdate={handleCommentUpdate}
+      />
     </section>
   );
 }

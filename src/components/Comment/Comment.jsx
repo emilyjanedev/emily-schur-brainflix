@@ -4,9 +4,12 @@ import { formatDistance } from "date-fns";
 import { formatString } from "../../utils/stringUtils";
 import Avatar from "../Avatar/Avatar";
 
-function Comment({ comment }) {
+function Comment({ comment, handleCommentUpdate }) {
   const { name, comment: description, timestamp, id } = comment;
 
+  const handleClick = () => {
+    handleCommentUpdate({ action: "delete", commentId: id });
+  };
   return (
     <li className="comment-list__item">
       <article className="comment" id={id}>
@@ -22,6 +25,11 @@ function Comment({ comment }) {
             )}
           </p>
           <p className="comment__description">{description}</p>
+          <i
+            className="comment__icon fa-solid fa-trash"
+            id="delete"
+            onClick={handleClick}
+          ></i>
         </div>
       </article>
     </li>
@@ -29,6 +37,7 @@ function Comment({ comment }) {
 }
 Comment.propTypes = {
   comment: PropTypes.object.isRequired,
+  handleCommentUpdate: PropTypes.func.isRequired,
 };
 
 export default Comment;
