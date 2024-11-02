@@ -5,7 +5,7 @@ import VideoBank from "../../components/VideoBank/VideoBank";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import { useEffect, useState, useMemo } from "react";
 import { Navigate } from "react-router-dom";
-import BrainflixApi, { apiKey } from "../../utils/brainflix-api";
+import BrainflixApi from "../../utils/brainflix-api";
 import { useParams } from "react-router-dom";
 
 function VideoDetailsPage() {
@@ -15,7 +15,7 @@ function VideoDetailsPage() {
   const [comments, setComments] = useState([]);
   const [notFound, setNotFound] = useState(false);
 
-  const brainflixApi = useMemo(() => new BrainflixApi(apiKey), [apiKey]);
+  const brainflixApi = useMemo(() => new BrainflixApi(), []);
 
   useEffect(() => {
     const loadVideoList = async () => {
