@@ -1,6 +1,5 @@
 import "./NotFoundPage.scss";
 import { Link, useParams } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 
 function NotFoundPage() {
   const { "*": params } = useParams();

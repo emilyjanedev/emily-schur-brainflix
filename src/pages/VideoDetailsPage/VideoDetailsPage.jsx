@@ -7,7 +7,6 @@ import { useEffect, useState, useMemo } from "react";
 import { Navigate } from "react-router-dom";
 import BrainflixApi, { apiKey } from "../../utils/brainflix-api";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 
 function VideoDetailsPage() {
   const { videoId } = useParams();
