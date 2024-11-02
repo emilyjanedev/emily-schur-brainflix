@@ -51,17 +51,10 @@
       border: 2px solid #d22d2d;
     }
 
-    @include tablet {
-      margin-bottom: 2rem;
-    }
-
-    @include desktop {
-      margin-bottom: 1.5rem;
-    }
-
     &--big {
       & {
         height: 7.5rem;
+        margin-bottom: 1.15rem;
       }
     }
   }
@@ -76,7 +69,7 @@
     bottom: 0;
 
     @include tablet {
-      bottom: 0.5rem;
+      bottom: 0.25rem;
     }
 
     @include desktop {

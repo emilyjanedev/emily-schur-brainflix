@@ -18,29 +18,26 @@ function VideoUploadForm() {
   };
 
   const isVideoTitleValid = () => {
-    return newVideo.videoTitle.length > 1 && newVideo.videoTitle.length < 101;
+    return newVideo.videoTitle.length > 0 && newVideo.videoTitle.length <= 100;
   };
 
   const isVideoDescriptionValid = () => {
     return (
-      newVideo.videoDescription.length > 1 &&
-      newVideo.videoDescription.length < 101
+      newVideo.videoDescription.length > 0 &&
+      newVideo.videoDescription.length <= 5000
     );
   };
 
   const isFormValid = () => {
     let errors = {};
-    if (!newVideo.videoTitle || !newVideo.videoDescription) {
-      return false;
-    }
 
     if (!isVideoTitleValid()) {
-      errors.videoTitle = "Title must be between 2-100 characters.";
+      errors.videoTitle = "Title is required. 100 character limit.";
     }
 
     if (!isVideoDescriptionValid()) {
       errors.videoDescription =
-        "Description must be between 2-5000 characters.";
+        "Description is required. 5000 character limit.";
     }
 
     setErrorMessages(errors);
@@ -78,20 +75,16 @@ function VideoUploadForm() {
               name="videoTitle"
               id="videoTitle"
               className={`video-upload-form__input ${
-                errorMessages.videoTitle
-                  ? "video-upload-form__input--error"
-                  : ""
+                errorMessages.videoTitle && "video-upload-form__input--error"
               }`}
               placeholder="Add a title to your video"
               value={newVideo.videoTitle}
               onChange={handleFieldChange}
             />
-            {errorMessages.videoTitle ? (
+            {errorMessages.videoTitle && (
               <p className="video-upload-form__error-message">
                 {errorMessages.videoTitle}
               </p>
-            ) : (
-              <></>
             )}
           </div>
           <div className="video-upload-form__error-wrapper">
@@ -105,20 +98,17 @@ function VideoUploadForm() {
               name="videoDescription"
               id="videoDescription"
               className={`video-upload-form__input video-upload-form__input--big ${
-                errorMessages.videoDescription
-                  ? "video-upload-form__input--error"
-                  : ""
+                errorMessages.videoDescription &&
+                "video-upload-form__input--error"
               }`}
               placeholder="Add a description to your video"
               value={newVideo.videoDescription}
               onChange={handleFieldChange}
             ></textarea>
-            {errorMessages.videoDescription ? (
+            {errorMessages.videoDescription && (
               <p className="video-upload-form__error-message">
                 {errorMessages.videoDescription}
               </p>
-            ) : (
-              <></>
             )}
           </div>
         </div>
@@ -131,7 +121,7 @@ function VideoUploadForm() {
           </Link>
         </div>
       </form>
-      {popupVisibility ? <UploadSuccessPopup /> : <></>}
+      {popupVisibility && <UploadSuccessPopup />}
     </>
   );
 }

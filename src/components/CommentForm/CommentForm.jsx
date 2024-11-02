@@ -6,6 +6,7 @@ import { useState } from "react";
 
 function CommentForm({ handleAddComment }) {
   const [newComment, setNewComment] = useState({ name: "", comment: "" });
+  const [errorMessages, setErrorMessages] = useState({});
 
   const handleNameChange = (event) => {
     setNewComment((prevComment) => ({
@@ -21,10 +22,37 @@ function CommentForm({ handleAddComment }) {
     }));
   };
 
+  const isNameValid = () => {
+    return newComment.name.length > 0 && newComment.name.length <= 30;
+  };
+
+  const isCommentValid = () => {
+    return newComment.comment.length > 0 && newComment.comment.length <= 10000;
+  };
+
+  const isFormValid = () => {
+    let errors = {};
+
+    if (!isNameValid()) {
+      errors.name = "Name is required. 30 character limit.";
+    }
+
+    if (!isCommentValid()) {
+      errors.comment = "Comment is required. 10,000 character limit.";
+    }
+
+    setErrorMessages(errors);
+    return Object.keys.length === 0;
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAddComment(newComment);
-    setNewComment({ name: "", comment: "" });
+
+    if (isFormValid()) {
+      handleAddComment(newComment);
+      setNewComment({ name: "", comment: "" });
+      setErrorMessages({});
+    }
   };
 
   return (
@@ -33,23 +61,41 @@ function CommentForm({ handleAddComment }) {
         <h3 className="comment-form__title">JOIN THE CONVERSATION</h3>
         <Avatar src={userAvatar} nameOfClass="comment-form__avatar" />
         <div className="comment-form__input-wrapper">
-          <input
-            type="text"
-            name="name"
-            id="name"
-            className="comment-form__input"
-            placeholder="Enter your name"
-            value={newComment.name}
-            onChange={handleNameChange}
-          />
-          <textarea
-            name="comment"
-            id="comment"
-            placeholder="Add a new comment"
-            className="comment-form__input comment-form__input--big"
-            value={newComment.comment}
-            onChange={handleCommentChange}
-          ></textarea>
+          <div className="comment-form__error-wrapper">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              className={`comment-form__input ${
+                errorMessages.name && "comment-form__input--error"
+              }`}
+              placeholder="Enter your name"
+              value={newComment.name}
+              onChange={handleNameChange}
+            />
+            {errorMessages.name && (
+              <p className="comment-form__error-message">
+                {errorMessages.name}
+              </p>
+            )}
+          </div>
+          <div className="comment-form__error-wrapper">
+            <textarea
+              name="comment"
+              id="comment"
+              placeholder="Add a new comment"
+              className={`comment-form__input comment-form__input--big ${
+                errorMessages.comment && "comment-form__input--error"
+              }`}
+              value={newComment.comment}
+              onChange={handleCommentChange}
+            ></textarea>
+            {errorMessages.comment && (
+              <p className="comment-form__error-message">
+                {errorMessages.comment}
+              </p>
+            )}
+          </div>
           <button className="comment-form__button">COMMENT</button>
         </div>
       </form>
