@@ -66,14 +66,11 @@
   &__error-message {
     color: #d22d2d;
     position: absolute;
-    bottom: 0;
+    bottom: 0.5rem;
+    font-size: 0.65rem;
 
     @include tablet {
-      bottom: 0.25rem;
-    }
-
-    @include desktop {
-      bottom: 0;
+      bottom: 0.5rem;
     }
   }
 
