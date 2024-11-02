@@ -38,11 +38,13 @@ function Comment({ comment, handleCommentUpdate }) {
             )}
           </p>
           <p className="comment__description">{description}</p>
-          <i
-            className="comment__icon fa-solid fa-trash"
-            id="delete"
-            onClick={handleClick}
-          ></i>
+          <div className="comment__icon-container">
+            <i
+              className="comment__icon fa-solid fa-trash"
+              id="delete"
+              onClick={handleClick}
+            ></i>
+          </div>
         </div>
       </article>
     </li>
