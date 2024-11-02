@@ -2,10 +2,20 @@ import "./Comment.scss";
 import PropTypes from "prop-types";
 import { formatDistance } from "date-fns";
 import { formatString } from "../../utils/stringUtils";
+import { useMemo } from "react";
+import UiAvatarsApi from "../../utils/ui-avatars-api";
 import Avatar from "../Avatar/Avatar";
 
 function Comment({ comment, handleCommentUpdate }) {
   const { name, comment: description, timestamp, id } = comment;
+  const uiAvatarsApi = useMemo(() => {
+    return new UiAvatarsApi([
+      "length=1",
+      "rounded=true",
+      "size=100",
+      "background=random",
+    ]);
+  }, []);
 
   const handleClick = () => {
     handleCommentUpdate({ action: "delete", commentId: id });
@@ -13,7 +23,10 @@ function Comment({ comment, handleCommentUpdate }) {
   return (
     <li className="comment-list__item">
       <article className="comment" id={id}>
-        <Avatar nameOfClass="comment__avatar" />
+        <Avatar
+          nameOfClass="comment__avatar"
+          src={uiAvatarsApi.getAvatar(name)}
+        />
         <div className="comment__content">
           <h3 className="comment__author">{name}</h3>
           <p className="comment__timestamp">
