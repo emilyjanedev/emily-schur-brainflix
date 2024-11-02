@@ -1,9 +1,6 @@
 import "./VideoBank.scss";
 import Video from "../Video/Video";
 import PropTypes from "prop-types";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { apiBaseUrl, apiKey } from "../../utils/api";
 
 function VideoBank({ videoList, activeVideoId }) {
   const filteredList = videoList.filter((video) => video.id !== activeVideoId);

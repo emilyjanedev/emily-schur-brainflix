@@ -3,9 +3,9 @@ import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import VideoDetails from "../../components/VideoDetails/VideoDetails";
 import VideoBank from "../../components/VideoBank/VideoBank";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Navigate } from "react-router-dom";
-import { apiBaseUrl, apiKey } from "../../utils/api";
+import BrainflixApi, { apiKey } from "../../utils/brainflix-api";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -16,91 +16,45 @@ function VideoDetailsPage() {
   const [comments, setComments] = useState([]);
   const [notFound, setNotFound] = useState(false);
 
-  const fetchVideos = async () => {
-    try {
-      const response = await axios.get(
-        `${apiBaseUrl}/videos?api_key=${apiKey}`
-      );
-      return response.data;
-    } catch (error) {
-      console.error("Could not fetch videos", error);
-    }
-  };
-
-  const fetchComments = async () => {
-    try {
-      const { data } = await axios.get(
-        `${apiBaseUrl}/videos/${activeVideo.id}?api_key=${apiKey}`
-      );
-      setComments(data.comments.sort((a, b) => b.timestamp - a.timestamp));
-    } catch (error) {
-      console.error("Could not get comments", error);
-    }
-  };
-
-  const fetchDefaultVideoId = async () => {
-    const videoList = await fetchVideos();
-    return videoList[0].id;
-  };
-
-  const fetchVideoById = async (id) => {
-    try {
-      const response = await axios.get(
-        `${apiBaseUrl}/videos/${id}?api_key=${apiKey}`
-      );
-      response.status === 404
-        ? setNotFound(true)
-        : setActiveVideo(response.data);
-    } catch (error) {
-      console.error("Could not fetch video", error);
-      setNotFound(true);
-    }
-  };
+  const brainflixApi = useMemo(() => new BrainflixApi(apiKey), [apiKey]);
 
   useEffect(() => {
-    const loadVideos = async () => {
-      const videos = await fetchVideos();
+    const loadVideoList = async () => {
+      const videos = await brainflixApi.getVideos();
       setVideoList(videos);
     };
-    loadVideos();
+    loadVideoList();
   }, []);
 
   useEffect(() => {
-    const fetchActiveVideo = async () => {
-      try {
-        const videoIdToFetch = videoId || (await fetchDefaultVideoId());
-        await fetchVideoById(videoIdToFetch);
-      } catch (error) {
-        console.error("Could not fetch video", error);
-      }
+    const loadActiveVideo = async () => {
+      const videoIdToFetch = videoId || (await brainflixApi.getVideoId(0));
+      setActiveVideo(await brainflixApi.getVideoById(videoIdToFetch));
     };
-    fetchActiveVideo();
+    loadActiveVideo();
   }, [videoId]);
 
   useEffect(() => {
-    if (activeVideo) {
-      fetchComments(activeVideo.id);
-    }
+    const loadComments = async () => {
+      if (activeVideo) {
+        setComments(await brainflixApi.getComments(activeVideo.id));
+      }
+    };
+    loadComments();
   }, [activeVideo]);
 
   const handleCommentUpdate = async (commentRequest) => {
-    try {
-      if (commentRequest.action === "post") {
-        await axios.post(
-          `${apiBaseUrl}/videos/${activeVideo.id}/comments?api_key=${apiKey}`,
-          commentRequest.newComment
-        );
-      }
-
-      if (commentRequest.action === "delete") {
-        await axios.delete(
-          `${apiBaseUrl}/videos/${activeVideo.id}/comments/${commentRequest.commentId}?api_key=${apiKey}`
-        );
-      }
-      fetchComments(activeVideo.id);
-    } catch (error) {
-      console.error("Could not complete request", error);
+    if (commentRequest.action === "post") {
+      await brainflixApi.postComment(activeVideo.id, commentRequest.newComment);
     }
+
+    if (commentRequest.action === "delete") {
+      await brainflixApi.deleteComment(
+        activeVideo.id,
+        commentRequest.commentId
+      );
+    }
+    setComments(await brainflixApi.getComments(activeVideo.id));
   };
 
   if (notFound) {
