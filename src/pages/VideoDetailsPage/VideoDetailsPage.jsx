@@ -13,6 +13,7 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
   const { videoId } = useParams();
   const [activeVideo, setActiveVideo] = useState(null);
   const [comments, setComments] = useState([]);
+  const [likeCount, setLikeCount] = useState("");
   const [notFound, setNotFound] = useState(false);
 
   const brainflixApi = useMemo(() => new BrainflixApi(), []);
@@ -43,6 +44,15 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
     loadComments();
   }, [activeVideo, brainflixApi]);
 
+  useEffect(() => {
+    const loadLikeCount = async () => {
+      if (activeVideo) {
+        setLikeCount(await brainflixApi.getLikeCount(activeVideo.id));
+      }
+    };
+    loadLikeCount();
+  }, [activeVideo, brainflixApi]);
+
   const handleCommentUpdate = async (commentRequest) => {
     if (commentRequest.action === "post") {
       await brainflixApi.postComment(activeVideo.id, commentRequest.newComment);
@@ -57,6 +67,11 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
     setComments(await brainflixApi.getComments(activeVideo.id));
   };
 
+  const handleVideoLike = async () => {
+    await brainflixApi.likeVideo(activeVideo.id);
+    setLikeCount(await brainflixApi.getLikeCount(activeVideo.id));
+  };
+
   if (notFound) {
     return <Navigate to="/page-not-found" />;
   }
@@ -67,7 +82,11 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
         <>
           <VideoPlayer activeVideo={activeVideo} />
           <div className="layout-container">
-            <VideoDetails activeVideo={activeVideo} />
+            <VideoDetails
+              activeVideo={activeVideo}
+              likeCount={likeCount}
+              handleVideoLike={handleVideoLike}
+            />
             <CommentSection
               comments={comments}
               handleCommentUpdate={handleCommentUpdate}

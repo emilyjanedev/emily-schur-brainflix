@@ -4,9 +4,15 @@ import { format } from "date-fns";
 import viewsIcon from "../../assets/images/icons/views.svg";
 import likesIcon from "../../assets/images/icons/likes.svg";
 
-function VideoDetails({ activeVideo }) {
-  const { title, channel, description, views, likes, timestamp, comments } =
+function VideoDetails({ activeVideo, likeCount, handleVideoLike }) {
+  const { title, channel, description, views, timestamp, comments } =
     activeVideo;
+  const likes = likeCount;
+
+  const handleClick = () => {
+    console.log("Clicked!");
+    handleVideoLike();
+  };
 
   return (
     <article className="video-details">
@@ -32,6 +38,7 @@ function VideoDetails({ activeVideo }) {
               src={likesIcon}
               alt="heart icon for likes"
               className="video-details__icon"
+              onClick={handleClick}
             />
             <p className="video-details__likes">{likes}</p>
           </div>
@@ -44,6 +51,8 @@ function VideoDetails({ activeVideo }) {
 }
 VideoDetails.propTypes = {
   activeVideo: PropTypes.object.isRequired,
+  likeCount: PropTypes.string.isRequired,
+  handleVideoLike: PropTypes.func.isRequired,
 };
 
 export default VideoDetails;

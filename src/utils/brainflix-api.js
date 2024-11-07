@@ -42,6 +42,16 @@ export default class BrainflixApi {
     }
   }
 
+  async getLikeCount(videoId) {
+    try {
+      const { data } = await axios.get(`${this.baseUrl}/videos/${videoId}`);
+      return data.likes;
+    } catch (error) {
+      console.error("Could not get like count.", error);
+      throw new Error("Error getting like count.");
+    }
+  }
+
   async getVideoId(index) {
     try {
       const videoList = await this.getVideos();
@@ -65,13 +75,22 @@ export default class BrainflixApi {
   async postComment(activeVideoId, comment) {
     try {
       const { data } = await axios.post(
-        `${this.baseUrl}/videos/${activeVideoId}/comments?`,
+        `${this.baseUrl}/videos/${activeVideoId}/comments`,
         comment
       );
       return data;
     } catch (error) {
       console.error("Could not post comment", error);
       throw new Error("Error posting comment");
+    }
+  }
+
+  async likeVideo(activeVideoId) {
+    try {
+      await axios.put(`${this.baseUrl}/videos/${activeVideoId}/likes`);
+    } catch (error) {
+      console.error("Could not like comment", error);
+      throw new Error("Error liking comment");
     }
   }
 
