@@ -17,10 +17,13 @@ function App() {
     setVideoList(videos);
   }, [brainflixApi]);
 
-  const handleVideoUpload = async (newVideo) => {
-    await brainflixApi.postVideo(newVideo);
-    loadVideoList();
-  };
+  const handleVideoUpload = useCallback(
+    async (newVideo) => {
+      await brainflixApi.postVideo(newVideo);
+      loadVideoList();
+    },
+    [brainflixApi, loadVideoList]
+  );
 
   useEffect(() => {
     loadVideoList();
