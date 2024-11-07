@@ -4,13 +4,13 @@ import VideoDetails from "../../components/VideoDetails/VideoDetails";
 import VideoBank from "../../components/VideoBank/VideoBank";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import { useEffect, useState, useMemo } from "react";
+import PropTypes from "prop-types";
 import { Navigate } from "react-router-dom";
 import BrainflixApi from "../../utils/brainflix-api";
 import { useParams } from "react-router-dom";
 
-function VideoDetailsPage() {
+function VideoDetailsPage({ videoList, loadVideoList }) {
   const { videoId } = useParams();
-  const [videoList, setVideoList] = useState([]);
   const [activeVideo, setActiveVideo] = useState(null);
   const [comments, setComments] = useState([]);
   const [notFound, setNotFound] = useState(false);
@@ -18,12 +18,8 @@ function VideoDetailsPage() {
   const brainflixApi = useMemo(() => new BrainflixApi(), []);
 
   useEffect(() => {
-    const loadVideoList = async () => {
-      const videos = await brainflixApi.getVideos();
-      setVideoList(videos);
-    };
     loadVideoList();
-  }, [brainflixApi]);
+  }, [loadVideoList]);
 
   useEffect(() => {
     const loadActiveVideo = async () => {
@@ -87,3 +83,8 @@ function VideoDetailsPage() {
 }
 
 export default VideoDetailsPage;
+
+VideoDetailsPage.propTypes = {
+  videoList: PropTypes.array.isRequired,
+  loadVideoList: PropTypes.func.isRequired,
+};

@@ -19,6 +19,17 @@ export default class BrainflixApi {
     }
   }
 
+  async postVideo(newVideo) {
+    try {
+      console.log("In brainflix api:", newVideo);
+      const { data } = await axios.post(`${this.baseUrl}/videos`, newVideo);
+      return data;
+    } catch (error) {
+      console.error("Could not post video.", error);
+      throw new Error("Error posting video.");
+    }
+  }
+
   async getComments(activeVideoId) {
     try {
       const { data } = await axios.get(

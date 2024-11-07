@@ -1,13 +1,14 @@
 import "./VideoUploadForm.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import videoThumbnail from "../../assets/images/Upload-video-preview.jpg";
 import UploadSuccessPopup from "../UploadSuccessPopup/UploadSuccessPopup";
 
-function VideoUploadForm() {
+function VideoUploadForm({ handleVideoUpload }) {
   const [newVideo, setNewVideo] = useState({
-    videoTitle: "",
-    videoDescription: "",
+    title: "",
+    description: "",
   });
   const [errorMessages, setErrorMessages] = useState({});
   const [popupVisibility, setPopupVisibility] = useState(false);
@@ -17,38 +18,38 @@ function VideoUploadForm() {
     setNewVideo((prevVideo) => ({ ...prevVideo, [name]: value }));
   };
 
-  const isVideoTitleValid = () => {
-    return newVideo.videoTitle.length > 0 && newVideo.videoTitle.length <= 100;
+  const istitleValid = () => {
+    return newVideo.title.length > 0 && newVideo.title.length <= 100;
   };
 
-  const isVideoDescriptionValid = () => {
+  const isdescriptionValid = () => {
     return (
-      newVideo.videoDescription.length > 0 &&
-      newVideo.videoDescription.length <= 5000
+      newVideo.description.length > 0 && newVideo.description.length <= 5000
     );
   };
 
   const isFormValid = () => {
     let errors = {};
 
-    if (!isVideoTitleValid()) {
-      errors.videoTitle = "Title is required. 100 character limit.";
+    if (!istitleValid()) {
+      errors.title = "Title is required. 100 character limit.";
     }
 
-    if (!isVideoDescriptionValid()) {
-      errors.videoDescription =
-        "Description is required. 5000 character limit.";
+    if (!isdescriptionValid()) {
+      errors.description = "Description is required. 5000 character limit.";
     }
 
     setErrorMessages(errors);
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (isFormValid()) {
-      setNewVideo({ videoTitle: "", videoDescription: "" });
+      console.log(newVideo);
+      handleVideoUpload(newVideo);
+      setNewVideo({ title: "", description: "" });
       setErrorMessages({});
       setPopupVisibility(true);
     }
@@ -66,48 +67,44 @@ function VideoUploadForm() {
           />
         </div>
         <div className="video-upload-form__input-wrapper">
-          <label htmlFor="videoTitle" className="video-upload-form__label">
+          <label htmlFor="title" className="video-upload-form__label">
             TITLE YOUR VIDEO
           </label>
           <div className="video-upload-form__error-wrapper">
             <input
               type="text"
-              name="videoTitle"
-              id="videoTitle"
+              name="title"
+              id="title"
               className={`video-upload-form__input ${
-                errorMessages.videoTitle && "video-upload-form__input--error"
+                errorMessages.title && "video-upload-form__input--error"
               }`}
               placeholder="Add a title to your video"
-              value={newVideo.videoTitle}
+              value={newVideo.title}
               onChange={handleFieldChange}
             />
-            {errorMessages.videoTitle && (
+            {errorMessages.title && (
               <p className="video-upload-form__error-message">
-                {errorMessages.videoTitle}
+                {errorMessages.title}
               </p>
             )}
           </div>
           <div className="video-upload-form__error-wrapper">
-            <label
-              htmlFor="videoDescription"
-              className="video-upload-form__label"
-            >
+            <label htmlFor="description" className="video-upload-form__label">
               ADD A VIDEO DESCRIPTION
             </label>
             <textarea
-              name="videoDescription"
-              id="videoDescription"
+              name="description"
+              id="description"
               className={`video-upload-form__input video-upload-form__input--big ${
-                errorMessages.videoDescription &&
-                "video-upload-form__input--error"
+                errorMessages.description && "video-upload-form__input--error"
               }`}
               placeholder="Add a description to your video"
-              value={newVideo.videoDescription}
+              value={newVideo.description}
               onChange={handleFieldChange}
             ></textarea>
-            {errorMessages.videoDescription && (
+            {errorMessages.description && (
               <p className="video-upload-form__error-message">
-                {errorMessages.videoDescription}
+                {errorMessages.description}
               </p>
             )}
           </div>
@@ -127,3 +124,7 @@ function VideoUploadForm() {
 }
 
 export default VideoUploadForm;
+
+VideoUploadForm.propTypes = {
+  handleVideoUpload: PropTypes.func.isRequired,
+};
