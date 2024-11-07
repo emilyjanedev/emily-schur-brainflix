@@ -3,7 +3,7 @@ import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import VideoDetails from "../../components/VideoDetails/VideoDetails";
 import VideoBank from "../../components/VideoBank/VideoBank";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { Navigate } from "react-router-dom";
 import BrainflixApi from "../../utils/brainflix-api";
@@ -53,24 +53,30 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
     loadLikeCount();
   }, [activeVideo, brainflixApi]);
 
-  const handleCommentUpdate = async (commentRequest) => {
-    if (commentRequest.action === "post") {
-      await brainflixApi.postComment(activeVideo.id, commentRequest.newComment);
-    }
+  const handleCommentUpdate = useCallback(
+    async (commentRequest) => {
+      if (commentRequest.action === "post") {
+        await brainflixApi.postComment(
+          activeVideo.id,
+          commentRequest.newComment
+        );
+      }
 
-    if (commentRequest.action === "delete") {
-      await brainflixApi.deleteComment(
-        activeVideo.id,
-        commentRequest.commentId
-      );
-    }
-    setComments(await brainflixApi.getComments(activeVideo.id));
-  };
+      if (commentRequest.action === "delete") {
+        await brainflixApi.deleteComment(
+          activeVideo.id,
+          commentRequest.commentId
+        );
+      }
+      setComments(await brainflixApi.getComments(activeVideo.id));
+    },
+    [brainflixApi, activeVideo]
+  );
 
-  const handleVideoLike = async () => {
+  const handleVideoLike = useCallback(async () => {
     await brainflixApi.likeVideo(activeVideo.id);
     setLikeCount(await brainflixApi.getLikeCount(activeVideo.id));
-  };
+  }, [brainflixApi, activeVideo]);
 
   if (notFound) {
     return <Navigate to="/page-not-found" />;
@@ -85,6 +91,7 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
             <VideoDetails
               activeVideo={activeVideo}
               likeCount={likeCount}
+              commentCount={comments.length}
               handleVideoLike={handleVideoLike}
             />
             <CommentSection
