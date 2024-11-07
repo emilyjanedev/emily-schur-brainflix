@@ -5,9 +5,8 @@ import VideoBank from "../../components/VideoBank/VideoBank";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import { useEffect, useState, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import BrainflixApi from "../../utils/brainflix-api";
-import { useParams } from "react-router-dom";
 
 function VideoDetailsPage({ videoList, loadVideoList }) {
   const { videoId } = useParams();
