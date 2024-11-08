@@ -1,20 +1,27 @@
 import "./VideoDetails.scss";
 import PropTypes from "prop-types";
 import { format } from "date-fns";
+import { useEffect, useState } from "react";
+import { getLikeCount, likeVideo } from "../../utils/brainflix-api";
 import viewsIcon from "../../assets/images/icons/views.svg";
 import likesIcon from "../../assets/images/icons/likes.svg";
 
-function VideoDetails({
-  activeVideo,
-  likeCount,
-  handleVideoLike,
-  commentCount,
-}) {
+function VideoDetails({ activeVideo, commentCount }) {
   const { title, channel, description, views, timestamp } = activeVideo;
-  const likes = likeCount;
+  const [likeCount, setLikeCount] = useState(activeVideo.likes);
 
-  const handleClick = () => {
-    handleVideoLike();
+  useEffect(() => {
+    const loadLikeCount = async () => {
+      if (activeVideo) {
+        setLikeCount(await getLikeCount(activeVideo.id));
+      }
+    };
+    loadLikeCount();
+  }, [activeVideo]);
+
+  const handleClick = async () => {
+    await likeVideo(activeVideo.id);
+    setLikeCount(await getLikeCount(activeVideo.id));
   };
 
   return (
@@ -43,7 +50,7 @@ function VideoDetails({
               className="video-details__icon"
               onClick={handleClick}
             />
-            <p className="video-details__likes">{likes}</p>
+            <p className="video-details__likes">{likeCount}</p>
           </div>
         </div>
       </div>
@@ -54,8 +61,6 @@ function VideoDetails({
 }
 VideoDetails.propTypes = {
   activeVideo: PropTypes.object.isRequired,
-  likeCount: PropTypes.string.isRequired,
-  handleVideoLike: PropTypes.func.isRequired,
   commentCount: PropTypes.number.isRequired,
 };
 

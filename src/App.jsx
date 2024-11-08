@@ -21,47 +21,22 @@ function App() {
     loadVideoList();
   }, [loadVideoList]);
 
-  const handleClickForward = async () => {
-    if (videoList.length > 0) {
-      setPageCount((prevCount) => prevCount + 1);
-    }
-  };
-
-  const handleClickBack = async () => {
-    if (pageCount > 1) {
-      setPageCount((prevCount) => prevCount - 1);
-    }
-  };
+  const videoDetailsPage = (
+    <VideoDetailsPage
+      videoList={videoList}
+      loadVideoList={loadVideoList}
+      pageCount={pageCount}
+      setPageCount={setPageCount}
+    />
+  );
 
   return (
     <>
       <BrowserRouter>
         <NavBar loadVideoList={loadVideoList} />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <VideoDetailsPage
-                videoList={videoList}
-                loadVideoList={loadVideoList}
-                pageCount={pageCount}
-                handleClickForward={handleClickForward}
-                handleClickBack={handleClickBack}
-              />
-            }
-          />
-          <Route
-            path="/videos/:videoId"
-            element={
-              <VideoDetailsPage
-                videoList={videoList}
-                loadVideoList={loadVideoList}
-                pageCount={pageCount}
-                handleClickForward={handleClickForward}
-                handleClickBack={handleClickBack}
-              />
-            }
-          />
+          <Route path="/" element={videoDetailsPage} />
+          <Route path="/videos/:videoId" element={videoDetailsPage} />
           <Route path="/upload" element={<UploadPage />} />
           <Route path="/page-not-found" element={<NotFoundPage />} />
           <Route path="*" element={<NotFoundPage />} />

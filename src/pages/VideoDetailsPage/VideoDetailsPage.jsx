@@ -12,21 +12,17 @@ import {
   getComments,
   postComment,
   deleteComment,
-  likeVideo,
-  getLikeCount,
 } from "../../utils/brainflix-api";
 
 function VideoDetailsPage({
   videoList,
   loadVideoList,
   pageCount,
-  handleClickForward,
-  handleClickBack,
+  setPageCount,
 }) {
   const { videoId } = useParams();
   const [activeVideo, setActiveVideo] = useState(null);
   const [comments, setComments] = useState([]);
-  const [likeCount, setLikeCount] = useState("");
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
@@ -51,15 +47,6 @@ function VideoDetailsPage({
     loadComments();
   }, [activeVideo]);
 
-  useEffect(() => {
-    const loadLikeCount = async () => {
-      if (activeVideo) {
-        setLikeCount(await getLikeCount(activeVideo.id));
-      }
-    };
-    loadLikeCount();
-  }, [activeVideo]);
-
   const handleCommentUpdate = useCallback(
     async (commentRequest) => {
       if (commentRequest.action === "post") {
@@ -75,11 +62,6 @@ function VideoDetailsPage({
     [activeVideo]
   );
 
-  const handleVideoLike = useCallback(async () => {
-    await likeVideo(activeVideo.id);
-    setLikeCount(await getLikeCount(activeVideo.id));
-  }, [activeVideo]);
-
   if (notFound) {
     return <Navigate to="/page-not-found" />;
   }
@@ -92,9 +74,7 @@ function VideoDetailsPage({
           <div className="layout-container">
             <VideoDetails
               activeVideo={activeVideo}
-              likeCount={likeCount}
               commentCount={comments.length}
-              handleVideoLike={handleVideoLike}
             />
             <CommentSection
               comments={comments}
@@ -106,8 +86,7 @@ function VideoDetailsPage({
               activeVideoId={activeVideo.id}
               loadVideoList={loadVideoList}
               pageCount={pageCount}
-              handleClickForward={handleClickForward}
-              handleClickBack={handleClickBack}
+              setPageCount={setPageCount}
             />
           </div>
         </>
@@ -124,6 +103,5 @@ VideoDetailsPage.propTypes = {
   videoList: PropTypes.array.isRequired,
   loadVideoList: PropTypes.func.isRequired,
   pageCount: PropTypes.number.isRequired,
-  handleClickForward: PropTypes.func.isRequired,
-  handleClickBack: PropTypes.func.isRequired,
+  setPageCount: PropTypes.func.isRequired,
 };

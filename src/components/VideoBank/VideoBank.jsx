@@ -8,14 +8,25 @@ function VideoBank({
   activeVideoId,
   loadVideoList,
   pageCount,
-  handleClickForward,
-  handleClickBack,
+  setPageCount,
 }) {
   const filteredList = videoList.filter((video) => video.id !== activeVideoId);
 
   useEffect(() => {
     loadVideoList(pageCount);
   }, [pageCount, loadVideoList]);
+
+  const handleClickForward = async () => {
+    if (videoList.length > 0) {
+      setPageCount((prevCount) => prevCount + 1);
+    }
+  };
+
+  const handleClickBack = async () => {
+    if (pageCount > 1) {
+      setPageCount((prevCount) => prevCount - 1);
+    }
+  };
 
   return (
     <section className="video-bank">
@@ -60,8 +71,7 @@ VideoBank.propTypes = {
   videoList: PropTypes.array.isRequired,
   loadVideoList: PropTypes.func.isRequired,
   pageCount: PropTypes.number.isRequired,
-  handleClickForward: PropTypes.func.isRequired,
-  handleClickBack: PropTypes.func.isRequired,
+  setPageCount: PropTypes.func.isRequired,
 };
 
 export default VideoBank;
