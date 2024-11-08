@@ -16,16 +16,18 @@ import {
   getLikeCount,
 } from "../../utils/brainflix-api";
 
-function VideoDetailsPage({ videoList, loadVideoList }) {
+function VideoDetailsPage({
+  videoList,
+  loadVideoList,
+  pageCount,
+  handleClickForward,
+  handleClickBack,
+}) {
   const { videoId } = useParams();
   const [activeVideo, setActiveVideo] = useState(null);
   const [comments, setComments] = useState([]);
   const [likeCount, setLikeCount] = useState("");
   const [notFound, setNotFound] = useState(false);
-
-  useEffect(() => {
-    loadVideoList();
-  }, [loadVideoList]);
 
   useEffect(() => {
     const loadActiveVideo = async () => {
@@ -103,6 +105,9 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
               videoList={videoList}
               activeVideoId={activeVideo.id}
               loadVideoList={loadVideoList}
+              pageCount={pageCount}
+              handleClickForward={handleClickForward}
+              handleClickBack={handleClickBack}
             />
           </div>
         </>
@@ -118,4 +123,7 @@ export default VideoDetailsPage;
 VideoDetailsPage.propTypes = {
   videoList: PropTypes.array.isRequired,
   loadVideoList: PropTypes.func.isRequired,
+  pageCount: PropTypes.number.isRequired,
+  handleClickForward: PropTypes.func.isRequired,
+  handleClickBack: PropTypes.func.isRequired,
 };

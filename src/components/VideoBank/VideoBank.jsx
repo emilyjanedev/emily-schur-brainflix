@@ -1,28 +1,21 @@
 import "./VideoBank.scss";
 import Video from "../Video/Video";
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-function VideoBank({ videoList, activeVideoId, loadVideoList }) {
+function VideoBank({
+  videoList,
+  activeVideoId,
+  loadVideoList,
+  pageCount,
+  handleClickForward,
+  handleClickBack,
+}) {
   const filteredList = videoList.filter((video) => video.id !== activeVideoId);
-  const [pageCount, setPageCount] = useState(1);
-  console.log(pageCount);
 
   useEffect(() => {
     loadVideoList(pageCount);
   }, [pageCount, loadVideoList]);
-
-  const handleClickForward = async () => {
-    if (videoList.length > 0) {
-      setPageCount((prevCount) => prevCount + 1);
-    }
-  };
-
-  const handleClickBack = async () => {
-    if (pageCount > 1) {
-      setPageCount((prevCount) => prevCount - 1);
-    }
-  };
 
   return (
     <section className="video-bank">
@@ -66,6 +59,9 @@ VideoBank.propTypes = {
   activeVideoId: PropTypes.string.isRequired,
   videoList: PropTypes.array.isRequired,
   loadVideoList: PropTypes.func.isRequired,
+  pageCount: PropTypes.number.isRequired,
+  handleClickForward: PropTypes.func.isRequired,
+  handleClickBack: PropTypes.func.isRequired,
 };
 
 export default VideoBank;

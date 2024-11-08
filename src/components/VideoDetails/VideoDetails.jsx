@@ -14,7 +14,6 @@ function VideoDetails({
   const likes = likeCount;
 
   const handleClick = () => {
-    console.log("Clicked!");
     handleVideoLike();
   };
 

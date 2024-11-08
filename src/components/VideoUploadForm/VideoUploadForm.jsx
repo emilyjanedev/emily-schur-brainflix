@@ -1,11 +1,11 @@
 import "./VideoUploadForm.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { postVideo } from "../../utils/brainflix-api";
 import videoThumbnail from "../../assets/images/Upload-video-preview.jpg";
 import UploadSuccessPopup from "../UploadSuccessPopup/UploadSuccessPopup";
 
-function VideoUploadForm({ handleVideoUpload }) {
+function VideoUploadForm() {
   const [newVideo, setNewVideo] = useState({
     title: "",
     description: "",
@@ -47,8 +47,7 @@ function VideoUploadForm({ handleVideoUpload }) {
     event.preventDefault();
 
     if (isFormValid()) {
-      console.log(newVideo);
-      handleVideoUpload(newVideo);
+      await postVideo(newVideo);
       setNewVideo({ title: "", description: "" });
       setErrorMessages({});
       setPopupVisibility(true);
@@ -124,7 +123,3 @@ function VideoUploadForm({ handleVideoUpload }) {
 }
 
 export default VideoUploadForm;
-
-VideoUploadForm.propTypes = {
-  handleVideoUpload: PropTypes.func.isRequired,
-};

@@ -14,7 +14,6 @@ export async function getVideos(page) {
 
 export async function postVideo(newVideo) {
   try {
-    console.log("In brainflix api:", newVideo);
     const { data } = await axios.post(`${apiBaseUrl}/videos`, newVideo);
     return data;
   } catch (error) {

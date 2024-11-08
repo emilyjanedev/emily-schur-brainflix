@@ -18,7 +18,6 @@ function Comment({ comment, handleCommentUpdate, activeVideoId }) {
   };
 
   const handleClick = (event) => {
-    console.log(event.target.id);
     if (event.target.id === "delete") {
       handleCommentUpdate({ action: event.target.id, commentId: id });
     } else {
