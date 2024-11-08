@@ -3,16 +3,10 @@ import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import VideoDetails from "../../components/VideoDetails/VideoDetails";
 import VideoBank from "../../components/VideoBank/VideoBank";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
-import { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
+import { useEffect, useState, useCallback } from "react";
 import { Navigate, useParams } from "react-router-dom";
-import {
-  getVideoId,
-  getVideoById,
-  getComments,
-  postComment,
-  deleteComment,
-} from "../../utils/brainflix-api";
+import { getVideoId, getVideoById } from "../../utils/brainflix-api";
 
 function VideoDetailsPage({
   videoList,
@@ -22,14 +16,16 @@ function VideoDetailsPage({
 }) {
   const { videoId } = useParams();
   const [activeVideo, setActiveVideo] = useState(null);
-  const [comments, setComments] = useState([]);
   const [notFound, setNotFound] = useState(false);
+  const [commentCount, setCommentCount] = useState(0);
 
   useEffect(() => {
     const loadActiveVideo = async () => {
       try {
         const videoIdToFetch = videoId || (await getVideoId(0));
-        setActiveVideo(await getVideoById(videoIdToFetch));
+        const fetchedVideo = await getVideoById(videoIdToFetch);
+        setActiveVideo(fetchedVideo);
+        setCommentCount(fetchedVideo.comments.length);
       } catch (error) {
         console.error("Video does not exist", error);
         setNotFound(true);
@@ -38,29 +34,9 @@ function VideoDetailsPage({
     loadActiveVideo();
   }, [videoId]);
 
-  useEffect(() => {
-    const loadComments = async () => {
-      if (activeVideo) {
-        setComments(await getComments(activeVideo.id));
-      }
-    };
-    loadComments();
-  }, [activeVideo]);
-
-  const handleCommentUpdate = useCallback(
-    async (commentRequest) => {
-      if (commentRequest.action === "post") {
-        await postComment(activeVideo.id, commentRequest.newComment);
-      }
-
-      if (commentRequest.action === "delete") {
-        await deleteComment(activeVideo.id, commentRequest.commentId);
-      }
-
-      setComments(await getComments(activeVideo.id));
-    },
-    [activeVideo]
-  );
+  const commentCountUpdate = useCallback((count) => {
+    setCommentCount(count);
+  }, []);
 
   if (notFound) {
     return <Navigate to="/page-not-found" />;
@@ -74,12 +50,11 @@ function VideoDetailsPage({
           <div className="layout-container">
             <VideoDetails
               activeVideo={activeVideo}
-              commentCount={comments.length}
+              commentCount={commentCount}
             />
             <CommentSection
-              comments={comments}
               activeVideoId={activeVideo.id}
-              handleCommentUpdate={handleCommentUpdate}
+              commentCountUpdate={commentCountUpdate}
             />
             <VideoBank
               videoList={videoList}
