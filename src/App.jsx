@@ -3,29 +3,24 @@ import NavBar from "./components/NavBar/NavBar";
 import VideoDetailsPage from "./pages/VideoDetailsPage/VideoDetailsPage";
 import UploadPage from "./pages/UploadPage/UploadPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import BrainflixApi from "./utils/brainflix-api";
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { getVideos, postVideo } from "./utils/brainflix-api";
+import { useEffect, useState, useCallback } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [videoList, setVideoList] = useState([]);
 
-  const brainflixApi = useMemo(() => new BrainflixApi(), []);
-
-  const loadVideoList = useCallback(
-    async (page = 1) => {
-      const videos = await brainflixApi.getVideos(page);
-      setVideoList(videos);
-    },
-    [brainflixApi]
-  );
+  const loadVideoList = useCallback(async (page = 1) => {
+    const videos = await getVideos(page);
+    setVideoList(videos);
+  }, []);
 
   const handleVideoUpload = useCallback(
     async (newVideo) => {
-      await brainflixApi.postVideo(newVideo);
+      await postVideo(newVideo);
       loadVideoList();
     },
-    [brainflixApi, loadVideoList]
+    [loadVideoList]
   );
 
   useEffect(() => {

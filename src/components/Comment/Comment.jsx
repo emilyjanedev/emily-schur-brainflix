@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { formatDistance } from "date-fns";
 import { formatString } from "../../utils/stringUtils";
 import { useMemo, useState } from "react";
-import BrainflixApi from "../../utils/brainflix-api";
+import { likeComment } from "../../utils/brainflix-api";
 import UiAvatarsApi from "../../utils/ui-avatars-api";
 import Avatar from "../Avatar/Avatar";
 
@@ -12,10 +12,8 @@ function Comment({ comment, handleCommentUpdate, activeVideoId }) {
   const [likeCount, setLikeCount] = useState(comment.likes);
   const [likeStyle, setLikeStyle] = useState("");
 
-  const brainflixApi = useMemo(() => new BrainflixApi(), []);
-
   const handleCommentLike = async () => {
-    const updatedLikeCount = await brainflixApi.likeComment(activeVideoId, id);
+    const updatedLikeCount = await likeComment(activeVideoId, id);
     setLikeCount(updatedLikeCount);
   };
 

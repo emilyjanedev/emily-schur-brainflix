@@ -3,10 +3,18 @@ import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import VideoDetails from "../../components/VideoDetails/VideoDetails";
 import VideoBank from "../../components/VideoBank/VideoBank";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
-import { useEffect, useState, useMemo, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { Navigate, useParams } from "react-router-dom";
-import BrainflixApi from "../../utils/brainflix-api";
+import {
+  getVideoId,
+  getVideoById,
+  getComments,
+  postComment,
+  deleteComment,
+  likeVideo,
+  getLikeCount,
+} from "../../utils/brainflix-api";
 
 function VideoDetailsPage({ videoList, loadVideoList }) {
   const { videoId } = useParams();
@@ -15,8 +23,6 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
   const [likeCount, setLikeCount] = useState("");
   const [notFound, setNotFound] = useState(false);
 
-  const brainflixApi = useMemo(() => new BrainflixApi(), []);
-
   useEffect(() => {
     loadVideoList();
   }, [loadVideoList]);
@@ -24,59 +30,53 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
   useEffect(() => {
     const loadActiveVideo = async () => {
       try {
-        const videoIdToFetch = videoId || (await brainflixApi.getVideoId(0));
-        setActiveVideo(await brainflixApi.getVideoById(videoIdToFetch));
+        const videoIdToFetch = videoId || (await getVideoId(0));
+        setActiveVideo(await getVideoById(videoIdToFetch));
       } catch (error) {
         console.error("Video does not exist", error);
         setNotFound(true);
       }
     };
     loadActiveVideo();
-  }, [videoId, brainflixApi]);
+  }, [videoId]);
 
   useEffect(() => {
     const loadComments = async () => {
       if (activeVideo) {
-        setComments(await brainflixApi.getComments(activeVideo.id));
+        setComments(await getComments(activeVideo.id));
       }
     };
     loadComments();
-  }, [activeVideo, brainflixApi]);
+  }, [activeVideo]);
 
   useEffect(() => {
     const loadLikeCount = async () => {
       if (activeVideo) {
-        setLikeCount(await brainflixApi.getLikeCount(activeVideo.id));
+        setLikeCount(await getLikeCount(activeVideo.id));
       }
     };
     loadLikeCount();
-  }, [activeVideo, brainflixApi]);
+  }, [activeVideo]);
 
   const handleCommentUpdate = useCallback(
     async (commentRequest) => {
       if (commentRequest.action === "post") {
-        await brainflixApi.postComment(
-          activeVideo.id,
-          commentRequest.newComment
-        );
+        await postComment(activeVideo.id, commentRequest.newComment);
       }
 
       if (commentRequest.action === "delete") {
-        await brainflixApi.deleteComment(
-          activeVideo.id,
-          commentRequest.commentId
-        );
+        await deleteComment(activeVideo.id, commentRequest.commentId);
       }
 
-      setComments(await brainflixApi.getComments(activeVideo.id));
+      setComments(await getComments(activeVideo.id));
     },
-    [brainflixApi, activeVideo]
+    [activeVideo]
   );
 
   const handleVideoLike = useCallback(async () => {
-    await brainflixApi.likeVideo(activeVideo.id);
-    setLikeCount(await brainflixApi.getLikeCount(activeVideo.id));
-  }, [brainflixApi, activeVideo]);
+    await likeVideo(activeVideo.id);
+    setLikeCount(await getLikeCount(activeVideo.id));
+  }, [activeVideo]);
 
   if (notFound) {
     return <Navigate to="/page-not-found" />;
