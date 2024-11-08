@@ -12,10 +12,13 @@ function App() {
 
   const brainflixApi = useMemo(() => new BrainflixApi(), []);
 
-  const loadVideoList = useCallback(async () => {
-    const videos = await brainflixApi.getVideos();
-    setVideoList(videos);
-  }, [brainflixApi]);
+  const loadVideoList = useCallback(
+    async (page = 1) => {
+      const videos = await brainflixApi.getVideos(page);
+      setVideoList(videos);
+    },
+    [brainflixApi]
+  );
 
   const handleVideoUpload = useCallback(
     async (newVideo) => {

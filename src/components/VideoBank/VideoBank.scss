@@ -24,13 +24,53 @@
     padding-right: 0;
   }
 
-  &__title {
+  &__title,
+  &__page-count {
     @include mobile-labels-buttons;
     color: $primary-medium;
 
     @include tablet {
       @include tablet-labels-buttons;
     }
+
+    @include desktop {
+      padding-left: 1.5rem;
+    }
+  }
+
+  &__page-count {
+    padding: 0;
+  }
+
+  &__icon {
+    width: 1.25rem;
+
+    &:hover {
+      cursor: pointer;
+      color: $primary-dark;
+    }
+  }
+
+  &__icon-wrapper {
+    @include flex-center;
+    gap: 0.5rem;
+  }
+
+  &__header-wrapper {
+    @include flex-row(flex-start, center, 1rem);
+  }
+
+  &__link {
+    color: $brainflix-blue;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__message-wrapper {
+    @include flex-column(center, start);
+    padding: 1rem 0;
 
     @include desktop {
       padding-left: 1.5rem;

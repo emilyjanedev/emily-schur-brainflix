@@ -9,9 +9,9 @@ export default class BrainflixApi {
     this.baseUrl = apiBaseUrl;
   }
 
-  async getVideos() {
+  async getVideos(page) {
     try {
-      const { data } = await axios.get(`${this.baseUrl}/videos`);
+      const { data } = await axios.get(`${this.baseUrl}/videos?page=${page}`);
       return data;
     } catch (error) {
       console.error("Could not fetch videos", error);

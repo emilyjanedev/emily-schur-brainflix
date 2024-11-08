@@ -97,7 +97,11 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
               comments={comments}
               handleCommentUpdate={handleCommentUpdate}
             />
-            <VideoBank videoList={videoList} activeVideoId={activeVideo.id} />
+            <VideoBank
+              videoList={videoList}
+              activeVideoId={activeVideo.id}
+              loadVideoList={loadVideoList}
+            />
           </div>
         </>
       ) : (
