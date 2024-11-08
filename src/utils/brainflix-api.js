@@ -104,4 +104,16 @@ export default class BrainflixApi {
       throw new Error("Error deleting comment");
     }
   }
+
+  async likeComment(activeVideoId, commentId) {
+    try {
+      const { data } = await axios.put(
+        `${apiBaseUrl}/videos/${activeVideoId}/comments/${commentId}`
+      );
+      return data.likes;
+    } catch (error) {
+      console.error("Could not like comment", error);
+      throw new Error("Error liking comment");
+    }
+  }
 }

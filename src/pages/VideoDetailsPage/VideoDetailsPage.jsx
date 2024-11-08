@@ -67,6 +67,7 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
           commentRequest.commentId
         );
       }
+
       setComments(await brainflixApi.getComments(activeVideo.id));
     },
     [brainflixApi, activeVideo]
@@ -95,6 +96,7 @@ function VideoDetailsPage({ videoList, loadVideoList }) {
             />
             <CommentSection
               comments={comments}
+              activeVideoId={activeVideo.id}
               handleCommentUpdate={handleCommentUpdate}
             />
             <VideoBank

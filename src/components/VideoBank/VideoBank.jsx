@@ -1,6 +1,4 @@
 import "./VideoBank.scss";
-import arrowBack from "../../assets/images/icons/arrow-back.svg";
-import arrowForward from "../../assets/images/icons/arrow-forward.svg";
 import Video from "../Video/Video";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
@@ -31,19 +29,15 @@ function VideoBank({ videoList, activeVideoId, loadVideoList }) {
       <div className="video-bank__header-wrapper">
         <h2 className="video-bank__title">NEXT VIDEOS</h2>
         <div className="video-bank__icon-wrapper">
-          <img
-            src={arrowBack}
+          <i
+            className="video-bank__icon fa-solid fa-arrow-left"
             onClick={handleClickBack}
-            className="video-bank__icon"
-            alt="arrow to navigate back in video list"
-          />
+          ></i>
           <p className="video-bank__page-count">{pageCount}</p>
-          <img
-            src={arrowForward}
+          <i
+            className="video-bank__icon fa-solid fa-arrow-right"
             onClick={handleClickForward}
-            className="video-bank__icon"
-            alt="arrow to navigate forward in video list"
-          />
+          ></i>
         </div>
       </div>
       {videoList.length === 0 ? (

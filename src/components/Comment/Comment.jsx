@@ -2,12 +2,22 @@ import "./Comment.scss";
 import PropTypes from "prop-types";
 import { formatDistance } from "date-fns";
 import { formatString } from "../../utils/stringUtils";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import BrainflixApi from "../../utils/brainflix-api";
 import UiAvatarsApi from "../../utils/ui-avatars-api";
 import Avatar from "../Avatar/Avatar";
 
-function Comment({ comment, handleCommentUpdate }) {
+function Comment({ comment, handleCommentUpdate, activeVideoId }) {
   const { name, comment: description, timestamp, id } = comment;
+  const [likeCount, setLikeCount] = useState(comment.likes);
+
+  const brainflixApi = useMemo(() => new BrainflixApi(), []);
+
+  const handleCommentLike = async () => {
+    const updatedLikeCount = await brainflixApi.likeComment(activeVideoId, id);
+    setLikeCount(updatedLikeCount);
+  };
+
   const uiAvatarsApi = useMemo(() => {
     return new UiAvatarsApi([
       "length=1",
@@ -17,8 +27,13 @@ function Comment({ comment, handleCommentUpdate }) {
     ]);
   }, []);
 
-  const handleClick = () => {
-    handleCommentUpdate({ action: "delete", commentId: id });
+  const handleClick = (event) => {
+    console.log(event.target.id);
+    if (event.target.id === "delete") {
+      handleCommentUpdate({ action: event.target.id, commentId: id });
+    } else {
+      handleCommentLike();
+    }
   };
   return (
     <li className="comment-list__item">
@@ -39,6 +54,12 @@ function Comment({ comment, handleCommentUpdate }) {
           </p>
           <p className="comment__description">{description}</p>
           <div className="comment__icon-container">
+            <p className="comment__like-count">{likeCount}</p>
+            <i
+              className="comment__icon fa-solid fa-heart"
+              id="like"
+              onClick={handleClick}
+            ></i>
             <i
               className="comment__icon fa-solid fa-trash"
               id="delete"
@@ -53,6 +74,7 @@ function Comment({ comment, handleCommentUpdate }) {
 Comment.propTypes = {
   comment: PropTypes.object.isRequired,
   handleCommentUpdate: PropTypes.func.isRequired,
+  activeVideoId: PropTypes.string.isRequired,
 };
 
 export default Comment;
