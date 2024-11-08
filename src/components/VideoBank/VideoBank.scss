@@ -45,9 +45,16 @@
   &__icon {
     color: $primary-medium;
 
-    &:hover {
+    &:active {
       cursor: pointer;
       color: $brainflix-blue;
+    }
+
+    @include desktop {
+      &:hover {
+        cursor: pointer;
+        color: $brainflix-blue;
+      }
     }
   }
 
@@ -63,7 +70,8 @@
   &__link {
     color: $brainflix-blue;
 
-    &:hover {
+    &:hover,
+    &:active {
       cursor: pointer;
     }
   }

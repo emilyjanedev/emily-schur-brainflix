@@ -10,6 +10,7 @@ import Avatar from "../Avatar/Avatar";
 function Comment({ comment, handleCommentUpdate, activeVideoId }) {
   const { name, comment: description, timestamp, id } = comment;
   const [likeCount, setLikeCount] = useState(comment.likes);
+  const [likeStyle, setLikeStyle] = useState("");
 
   const brainflixApi = useMemo(() => new BrainflixApi(), []);
 
@@ -32,7 +33,12 @@ function Comment({ comment, handleCommentUpdate, activeVideoId }) {
     if (event.target.id === "delete") {
       handleCommentUpdate({ action: event.target.id, commentId: id });
     } else {
-      handleCommentLike();
+      if (likeStyle) {
+        setLikeStyle("");
+      } else {
+        setLikeStyle("comment__icon--liked");
+        handleCommentLike();
+      }
     }
   };
   return (
@@ -56,7 +62,7 @@ function Comment({ comment, handleCommentUpdate, activeVideoId }) {
           <div className="comment__icon-container">
             <p className="comment__like-count">{likeCount}</p>
             <i
-              className="comment__icon fa-solid fa-heart"
+              className={`comment__icon fa-solid fa-heart ${likeStyle}`}
               id="like"
               onClick={handleClick}
             ></i>

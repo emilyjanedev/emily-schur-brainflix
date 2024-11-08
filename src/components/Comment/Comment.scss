@@ -50,9 +50,18 @@
     color: $primary-medium;
     padding: 0.25rem;
 
-    &:hover {
-      cursor: pointer;
+    &--liked {
       color: $brainflix-blue;
+    }
+
+    &:active {
+      cursor: pointer;
+    }
+
+    @include desktop {
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     &:active {

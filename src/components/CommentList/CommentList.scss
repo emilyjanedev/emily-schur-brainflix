@@ -1,3 +1,19 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
 .comment-list {
   list-style-type: none;
+
+  &__message {
+    color: $primary-medium;
+    text-align: center;
+    padding: 5rem 0;
+    border-bottom: $divider;
+
+    @include desktop {
+      border-right: $divider;
+      border-bottom: none;
+      padding: 9.25rem;
+    }
+  }
 }
