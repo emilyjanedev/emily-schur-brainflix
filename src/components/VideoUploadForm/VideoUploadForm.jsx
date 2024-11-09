@@ -9,34 +9,47 @@ function VideoUploadForm() {
   const [newVideo, setNewVideo] = useState({
     title: "",
     description: "",
+    file: null,
   });
   const [errorMessages, setErrorMessages] = useState({});
   const [popupVisibility, setPopupVisibility] = useState(false);
   const brainflixApi = useMemo(() => new BrainflixApi(), []);
 
   const handleFieldChange = (event) => {
-    const { name, value } = event.target;
-    setNewVideo((prevVideo) => ({ ...prevVideo, [name]: value }));
+    const { name, value, files } = event.target;
+    if (name === "file") {
+      setNewVideo((prevData) => ({
+        ...prevData,
+        [name]: files[0],
+      }));
+    } else {
+      setNewVideo((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
-  const istitleValid = () => {
-    return newVideo.title.length > 0 && newVideo.title.length <= 100;
-  };
-
-  const isdescriptionValid = () => {
-    return (
-      newVideo.description.length > 0 && newVideo.description.length <= 5000
-    );
+  const validateField = (name, value) => {
+    switch (name) {
+      case "title":
+        return value.length > 0 && value.length <= 100;
+      case "description":
+        return value.length > 0 && value.length <= 5000;
+      default:
+        return true;
+    }
   };
 
   const isFormValid = () => {
     let errors = {};
+    const { title, description } = newVideo;
 
-    if (!istitleValid()) {
+    if (!validateField("title", title)) {
       errors.title = "Title is required. 100 character limit.";
     }
 
-    if (!isdescriptionValid()) {
+    if (!validateField("description", description)) {
       errors.description = "Description is required. 5000 character limit.";
     }
 
@@ -48,24 +61,50 @@ function VideoUploadForm() {
     event.preventDefault();
 
     if (isFormValid()) {
-      await brainflixApi.postVideo(newVideo);
-      setNewVideo({ title: "", description: "" });
+      const formData = new FormData();
+      formData.append("fileData", newVideo.file);
+      formData.append("title", newVideo.title);
+      formData.append("description", newVideo.description);
+
+      await brainflixApi.postVideo(formData);
+
+      setNewVideo({
+        title: "",
+        description: "",
+        file: null,
+      });
       setErrorMessages({});
       setPopupVisibility(true);
     }
   };
 
+  const imagePreview = newVideo.file
+    ? URL.createObjectURL(newVideo.file)
+    : videoThumbnail;
+
   return (
     <>
       <form className="video-upload-form" onSubmit={handleSubmit}>
-        <div className="video-upload-form__image-wrapper">
-          <p className="video-upload-form__label">VIDEO THUMBNAIL</p>
-          <img
-            src={videoThumbnail}
-            alt="video thumbnail"
-            className="video-upload-form__thumbnail"
+        <div className="video-upload-form__image-input-wrapper">
+          <label htmlFor="file" className="video-upload-form__label">
+            VIDEO THUMBNAIL
+          </label>
+          <div className="video-upload-form__image-wrapper">
+            <img
+              src={imagePreview}
+              alt="video thumbnail"
+              className="video-upload-form__thumbnail"
+            />
+          </div>
+          <input
+            type="file"
+            name="file"
+            id="file"
+            className="video-upload-form__upload-input"
+            onChange={handleFieldChange}
           />
         </div>
+
         <div className="video-upload-form__input-wrapper">
           <label htmlFor="title" className="video-upload-form__label">
             TITLE YOUR VIDEO

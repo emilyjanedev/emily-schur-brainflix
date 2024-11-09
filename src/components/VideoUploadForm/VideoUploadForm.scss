@@ -131,6 +131,16 @@
   }
 
   &__thumbnail {
+    object-fit: cover;
+    border-radius: 4px;
+    max-height: 23.4375rem;
+
+    @include desktop {
+      max-height: 13.75rem;
+    }
+  }
+
+  &__image-input-wrapper {
     margin-bottom: 1.5rem;
   }
 }
