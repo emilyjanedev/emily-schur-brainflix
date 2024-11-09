@@ -30,10 +30,12 @@
   }
 
   &__image {
-    border-radius: 4px;
     width: 35%;
-    height: 100%;
+    height: auto;
+    min-height: 3.75rem;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
+    border-radius: 4px;
 
     @include desktop {
       width: 25%;
