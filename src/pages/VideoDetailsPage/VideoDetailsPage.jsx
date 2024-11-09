@@ -20,13 +20,14 @@ function VideoDetailsPage() {
     const loadVideoStates = async () => {
       try {
         const fetchedVideoList = await brainflixApi.getVideos();
-        console.log(fetchedVideoList);
         const videoIdToFetch = videoId || fetchedVideoList[0].id;
         const fetchedVideo = await brainflixApi.getVideoById(videoIdToFetch);
 
         setActiveVideo(fetchedVideo);
         setVideoList(fetchedVideoList);
-        setComments(fetchedVideo.comments);
+        setComments(
+          fetchedVideo.comments.sort((a, b) => b.timestamp - a.timestamp)
+        );
         setVideoLikeCount(fetchedVideo.likes);
       } catch (error) {
         console.error("Video does not exist", error);

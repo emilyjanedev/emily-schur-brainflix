@@ -11,7 +11,6 @@
     border-bottom: $divider;
 
     @include desktop {
-      border-right: $divider;
       border-bottom: none;
       padding: 9.25rem;
     }

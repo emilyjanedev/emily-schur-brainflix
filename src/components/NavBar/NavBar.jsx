@@ -3,7 +3,6 @@ import brainflixLogo from "../../assets/images/logo/BrainFlix-logo.svg";
 import userAvatar from "../../assets/images/Mohan-muruge.jpg";
 import SearchForm from "../SearchForm/SearchForm";
 import Avatar from "../Avatar/Avatar";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function NavBar() {
@@ -24,7 +23,3 @@ function NavBar() {
 }
 
 export default NavBar;
-
-NavBar.propTypes = {
-  loadVideoList: PropTypes.func.isRequired,
-};

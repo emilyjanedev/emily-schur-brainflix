@@ -18,6 +18,7 @@
   @include desktop {
     width: 35%;
     position: absolute;
+    border-left: $divider;
     top: 0;
     right: 0;
     padding-left: 0;

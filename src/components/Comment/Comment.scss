@@ -11,10 +11,6 @@
     padding-top: 1.5rem;
   }
 
-  @include desktop {
-    border-right: $divider;
-  }
-
   &:last-child {
     @include desktop {
       border-bottom: none;

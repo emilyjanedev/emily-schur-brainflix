@@ -100,6 +100,7 @@ function VideoUploadForm() {
           </div>
           <input
             type="file"
+            accept="image/*"
             name="file"
             id="file"
             className="video-upload-form__upload-input"

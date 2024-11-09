@@ -17,7 +17,8 @@ function CommentSection({ comments, handleCommentUpdate, activeVideoId }) {
 }
 
 CommentSection.propTypes = {
-  commentCountUpdate: PropTypes.func.isRequired,
+  comments: PropTypes.array.isRequired,
+  handleCommentUpdate: PropTypes.func.isRequired,
   activeVideoId: PropTypes.string.isRequired,
 };
 

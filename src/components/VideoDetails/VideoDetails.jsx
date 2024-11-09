@@ -1,8 +1,10 @@
 import "./VideoDetails.scss";
 import PropTypes from "prop-types";
 import { format } from "date-fns";
+import { useEffect, useState } from "react";
 import viewsIcon from "../../assets/images/icons/views.svg";
 import likesIcon from "../../assets/images/icons/likes.svg";
+import likesIconLiked from "../../assets/images/icons/likes-liked.svg";
 
 function VideoDetails({
   title,
@@ -14,6 +16,20 @@ function VideoDetails({
   videoLikeCount,
   handleVideoLike,
 }) {
+  const [likeStyle, setLikeStyle] = useState(false);
+
+  useEffect(() => {
+    setLikeStyle(false);
+  }, [title]);
+
+  const handleClick = () => {
+    if (!likeStyle) {
+      setLikeStyle(true);
+    } else {
+      setLikeStyle(false);
+    }
+  };
+
   return (
     <article className="video-details">
       <h1 className="video-details__title">{title}</h1>
@@ -35,10 +51,13 @@ function VideoDetails({
           </div>
           <div className="video-details__likes-wrapper">
             <img
-              src={likesIcon}
+              src={likeStyle ? likesIconLiked : likesIcon}
               alt="heart icon for likes"
-              className="video-details__icon"
-              onClick={handleVideoLike}
+              className="video-details__icon video-details__icon--like"
+              onClick={() => {
+                handleVideoLike();
+                handleClick();
+              }}
             />
             <p className="video-details__likes">{videoLikeCount}</p>
           </div>
@@ -50,8 +69,14 @@ function VideoDetails({
   );
 }
 VideoDetails.propTypes = {
-  activeVideo: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  channel: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  views: PropTypes.string.isRequired,
+  timestamp: PropTypes.number.isRequired,
   commentCount: PropTypes.number.isRequired,
+  videoLikeCount: PropTypes.string.isRequired,
+  handleVideoLike: PropTypes.func.isRequired,
 };
 
 export default VideoDetails;
