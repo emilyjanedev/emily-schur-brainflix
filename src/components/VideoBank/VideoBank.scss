@@ -24,61 +24,13 @@
     padding-right: 0;
   }
 
-  &__title,
-  &__page-count {
+  &__title {
     @include mobile-labels-buttons;
     color: $primary-medium;
 
     @include tablet {
       @include tablet-labels-buttons;
     }
-
-    @include desktop {
-      padding-left: 1.5rem;
-    }
-  }
-
-  &__page-count {
-    padding: 0;
-  }
-
-  &__icon {
-    color: $primary-medium;
-
-    &:active {
-      cursor: pointer;
-      color: $brainflix-blue;
-    }
-
-    @include desktop {
-      &:hover {
-        cursor: pointer;
-        color: $brainflix-blue;
-      }
-    }
-  }
-
-  &__icon-wrapper {
-    @include flex-center;
-    gap: 0.5rem;
-  }
-
-  &__header-wrapper {
-    @include flex-row(flex-start, center, 1rem);
-  }
-
-  &__link {
-    color: $brainflix-blue;
-
-    &:hover,
-    &:active {
-      cursor: pointer;
-    }
-  }
-
-  &__message-wrapper {
-    @include flex-column(center, start);
-    padding: 1rem 0;
 
     @include desktop {
       padding-left: 1.5rem;

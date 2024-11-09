@@ -1,9 +1,7 @@
 import "./VideoPlayer.scss";
 import PropTypes from "prop-types";
 
-function VideoPlayer({ activeVideo }) {
-  const { video: src, image } = activeVideo;
-
+function VideoPlayer({ src, image }) {
   return (
     <video
       controls
@@ -22,3 +20,8 @@ VideoPlayer.propTypes = {
 };
 
 export default VideoPlayer;
+
+VideoPlayer.propTypes = {
+  src: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+};

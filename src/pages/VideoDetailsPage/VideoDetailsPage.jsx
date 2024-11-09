@@ -8,12 +8,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { getVideoId, getVideoById } from "../../utils/brainflix-api";
 
-function VideoDetailsPage({
-  videoList,
-  loadVideoList,
-  pageCount,
-  setPageCount,
-}) {
+function VideoDetailsPage() {
   const { videoId } = useParams();
   const [activeVideo, setActiveVideo] = useState(null);
   const [notFound, setNotFound] = useState(false);
@@ -46,7 +41,7 @@ function VideoDetailsPage({
     <main>
       {activeVideo ? (
         <>
-          <VideoPlayer activeVideo={activeVideo} />
+          <VideoPlayer src={activeVideo.video} image={activeVideo.image} />
           <div className="layout-container">
             <VideoDetails
               activeVideo={activeVideo}
@@ -56,13 +51,7 @@ function VideoDetailsPage({
               activeVideoId={activeVideo.id}
               commentCountUpdate={commentCountUpdate}
             />
-            <VideoBank
-              videoList={videoList}
-              activeVideoId={activeVideo.id}
-              loadVideoList={loadVideoList}
-              pageCount={pageCount}
-              setPageCount={setPageCount}
-            />
+            <VideoBank activeVideoId={activeVideo.id} />
           </div>
         </>
       ) : (

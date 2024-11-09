@@ -108,8 +108,3 @@ export default CommentForm;
 CommentForm.propTypes = {
   handleCommentUpdate: PropTypes.func.isRequired,
 };
-
-// Create State for each form entry
-// Create onChange handlers for each form entry
-// create validation functions for each input
-// Create overall form validation function
