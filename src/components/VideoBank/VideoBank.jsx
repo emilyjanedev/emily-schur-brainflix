@@ -1,22 +1,20 @@
 import "./VideoBank.scss";
 import Video from "../Video/Video";
 import PropTypes from "prop-types";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { getVideos } from "../../utils/brainflix-api";
 
 function VideoBank({ activeVideoId }) {
   const [videoList, setVideoList] = useState([]);
   const filteredList = videoList.filter((video) => video.id !== activeVideoId);
 
-  const loadVideoList = useCallback(async (page = 1) => {
-    const videos = await getVideos(page);
-    setVideoList(videos);
-    // setPageCount(page);
-  }, []);
-
   useEffect(() => {
+    const loadVideoList = async () => {
+      const videos = await getVideos();
+      setVideoList(videos);
+    };
     loadVideoList();
-  }, [loadVideoList]);
+  }, []);
 
   return (
     <section className="video-bank">

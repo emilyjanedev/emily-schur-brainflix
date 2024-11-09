@@ -2,9 +2,9 @@ import axios from "axios";
 
 const apiBaseUrl = import.meta.env.VITE_BRAINFLIX_API_BASE_URL;
 
-export async function getVideos(page) {
+export async function getVideos() {
   try {
-    const { data } = await axios.get(`${apiBaseUrl}/videos?page=${page}`);
+    const { data } = await axios.get(`${apiBaseUrl}/videos`);
     return data;
   } catch (error) {
     console.error("Could not fetch videos", error);
