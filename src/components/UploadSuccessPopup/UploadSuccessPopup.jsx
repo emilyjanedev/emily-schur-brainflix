@@ -1,7 +1,8 @@
 import "./UploadSuccessPopup.scss";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function UploadSuccessPopup() {
+function UploadSuccessPopup({ videoId }) {
   return (
     <>
       <article className="upload-success-popup">
@@ -9,7 +10,10 @@ function UploadSuccessPopup() {
           Video Succesfully Uploaded!
         </h2>
         <Link to="/" className="upload-success-popup__link">
-          OK
+          RETURN HOME
+        </Link>
+        <Link to={`/videos/${videoId}`} className="upload-success-popup__link">
+          GO TO VIDEO
         </Link>
       </article>
       <div className="upload-success-popup__screen"></div>
@@ -18,3 +22,7 @@ function UploadSuccessPopup() {
 }
 
 export default UploadSuccessPopup;
+
+UploadSuccessPopup.propTypes = {
+  videoId: PropTypes.string.isRequired,
+};

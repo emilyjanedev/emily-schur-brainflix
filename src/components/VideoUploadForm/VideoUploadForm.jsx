@@ -13,6 +13,7 @@ function VideoUploadForm() {
   });
   const [errorMessages, setErrorMessages] = useState({});
   const [popupVisibility, setPopupVisibility] = useState(false);
+  const [newVideoId, setNewVideoId] = useState("");
   const brainflixApi = useMemo(() => new BrainflixApi(), []);
 
   const handleFieldChange = (event) => {
@@ -66,7 +67,8 @@ function VideoUploadForm() {
       formData.append("title", newVideo.title);
       formData.append("description", newVideo.description);
 
-      await brainflixApi.postVideo(formData);
+      const { id } = await brainflixApi.postVideo(formData);
+      setNewVideoId(id);
 
       setNewVideo({
         title: "",
@@ -157,7 +159,7 @@ function VideoUploadForm() {
           </Link>
         </div>
       </form>
-      {popupVisibility && <UploadSuccessPopup />}
+      {popupVisibility && <UploadSuccessPopup videoId={newVideoId} />}
     </>
   );
 }
