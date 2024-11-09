@@ -1,29 +1,19 @@
 import "./VideoDetails.scss";
 import PropTypes from "prop-types";
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
-import { getLikeCount, likeVideo } from "../../utils/brainflix-api";
 import viewsIcon from "../../assets/images/icons/views.svg";
 import likesIcon from "../../assets/images/icons/likes.svg";
 
-function VideoDetails({ activeVideo, commentCount }) {
-  const { title, channel, description, views, timestamp } = activeVideo;
-  const [likeCount, setLikeCount] = useState(activeVideo.likes);
-
-  useEffect(() => {
-    const loadLikeCount = async () => {
-      if (activeVideo) {
-        setLikeCount(await getLikeCount(activeVideo.id));
-      }
-    };
-    loadLikeCount();
-  }, [activeVideo]);
-
-  const handleClick = async () => {
-    await likeVideo(activeVideo.id);
-    setLikeCount(await getLikeCount(activeVideo.id));
-  };
-
+function VideoDetails({
+  title,
+  channel,
+  description,
+  views,
+  timestamp,
+  commentCount,
+  videoLikeCount,
+  handleVideoLike,
+}) {
   return (
     <article className="video-details">
       <h1 className="video-details__title">{title}</h1>
@@ -48,9 +38,9 @@ function VideoDetails({ activeVideo, commentCount }) {
               src={likesIcon}
               alt="heart icon for likes"
               className="video-details__icon"
-              onClick={handleClick}
+              onClick={handleVideoLike}
             />
-            <p className="video-details__likes">{likeCount}</p>
+            <p className="video-details__likes">{videoLikeCount}</p>
           </div>
         </div>
       </div>

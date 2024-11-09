@@ -2,20 +2,14 @@ import "./Comment.scss";
 import PropTypes from "prop-types";
 import { formatDistance } from "date-fns";
 import { formatString } from "../../utils/stringUtils";
-import { useState } from "react";
-import { likeComment } from "../../utils/brainflix-api";
-import { getAvatar } from "../../utils/ui-avatars-api";
+import { useState, useMemo } from "react";
+import UiAvatarsApi from "../../utils/ui-avatars-api";
 import Avatar from "../Avatar/Avatar";
 
-function Comment({ comment, handleCommentUpdate, activeVideoId }) {
-  const { name, comment: description, timestamp, id } = comment;
-  const [likeCount, setLikeCount] = useState(comment.likes);
+function Comment({ comment, handleCommentUpdate }) {
+  const { name, comment: description, timestamp, id, likes } = comment;
   const [likeStyle, setLikeStyle] = useState("");
-
-  const handleCommentLike = async () => {
-    const updatedLikeCount = await likeComment(activeVideoId, id);
-    setLikeCount(updatedLikeCount);
-  };
+  const uiAvatarsApi = useMemo(() => new UiAvatarsApi(), []);
 
   const handleClick = (event) => {
     if (event.target.id === "delete") {
@@ -25,14 +19,17 @@ function Comment({ comment, handleCommentUpdate, activeVideoId }) {
         setLikeStyle("");
       } else {
         setLikeStyle("comment__icon--liked");
-        handleCommentLike();
+        handleCommentUpdate({ action: event.target.id, commentId: id });
       }
     }
   };
   return (
     <li className="comment-list__item">
       <article className="comment" id={id}>
-        <Avatar nameOfClass="comment__avatar" src={getAvatar(name)} />
+        <Avatar
+          nameOfClass="comment__avatar"
+          src={uiAvatarsApi.getAvatar(name)}
+        />
         <div className="comment__content">
           <h3 className="comment__author">{name}</h3>
           <p className="comment__timestamp">
@@ -45,7 +42,7 @@ function Comment({ comment, handleCommentUpdate, activeVideoId }) {
           </p>
           <p className="comment__description">{description}</p>
           <div className="comment__icon-container">
-            <p className="comment__like-count">{likeCount}</p>
+            <p className="comment__like-count">{likes}</p>
             <i
               className={`comment__icon fa-solid fa-heart ${likeStyle}`}
               id="like"

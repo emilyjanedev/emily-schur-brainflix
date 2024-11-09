@@ -1,12 +1,23 @@
-const baseUrl = "https://ui-avatars.com/api/";
-const options = ["length=1", "rounded=true", "size=100", "background=random"];
+class UiAvatarsApi {
+  constructor() {
+    this.baseUrl = "https://ui-avatars.com/api/";
+    this.options = [
+      "length=1",
+      "rounded=true",
+      "size=100",
+      "background=random",
+    ];
+  }
 
-export function getAvatar(name) {
-  const optionsString = createOptionsString(options);
-  const letter = name.charAt(0);
-  return `${baseUrl}?name=${letter}${optionsString}`;
+  getAvatar(name) {
+    const optionsString = this.createOptionsString();
+    const letter = name.charAt(0);
+    return `${this.baseUrl}?name=${letter}${optionsString}`;
+  }
+
+  createOptionsString() {
+    return this.options.reduce((acc, option) => acc + `&${option}`, "");
+  }
 }
 
-function createOptionsString(options) {
-  return options.reduce((acc, option) => acc + `&${option}`, "");
-}
+export default UiAvatarsApi;

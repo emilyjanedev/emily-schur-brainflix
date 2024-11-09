@@ -3,35 +3,68 @@ import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import VideoDetails from "../../components/VideoDetails/VideoDetails";
 import VideoBank from "../../components/VideoBank/VideoBank";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
-import PropTypes from "prop-types";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { Navigate, useParams } from "react-router-dom";
-import { getVideoId, getVideoById } from "../../utils/brainflix-api";
+import BrainflixApi from "../../utils/brainflix-api";
 
 function VideoDetailsPage() {
   const { videoId } = useParams();
-  const [activeVideo, setActiveVideo] = useState(null);
+  const [activeVideo, setActiveVideo] = useState({});
   const [notFound, setNotFound] = useState(false);
-  const [commentCount, setCommentCount] = useState(0);
+  const [comments, setComments] = useState([]);
+  const [videoList, setVideoList] = useState([]);
+  const [videoLikeCount, setVideoLikeCount] = useState(null);
+  const brainflixApi = useMemo(() => new BrainflixApi(), []);
 
   useEffect(() => {
-    const loadActiveVideo = async () => {
+    const loadVideoStates = async () => {
       try {
-        const videoIdToFetch = videoId || (await getVideoId(0));
-        const fetchedVideo = await getVideoById(videoIdToFetch);
+        const fetchedVideoList = await brainflixApi.getVideos();
+        console.log(fetchedVideoList);
+        const videoIdToFetch = videoId || fetchedVideoList[0].id;
+        const fetchedVideo = await brainflixApi.getVideoById(videoIdToFetch);
+
         setActiveVideo(fetchedVideo);
-        setCommentCount(fetchedVideo.comments.length);
+        setVideoList(fetchedVideoList);
+        setComments(fetchedVideo.comments);
+        setVideoLikeCount(fetchedVideo.likes);
       } catch (error) {
         console.error("Video does not exist", error);
         setNotFound(true);
       }
     };
-    loadActiveVideo();
-  }, [videoId]);
+    loadVideoStates();
+  }, [videoId, brainflixApi]);
 
-  const commentCountUpdate = useCallback((count) => {
-    setCommentCount(count);
-  }, []);
+  const handleVideoLike = useCallback(async () => {
+    const likedVideo = await brainflixApi.likeVideo(activeVideo.id);
+    setVideoLikeCount(likedVideo.likes);
+  }, [activeVideo.id, brainflixApi]);
+
+  const handleCommentUpdate = useCallback(
+    async (commentRequest) => {
+      if (commentRequest.action === "post") {
+        await brainflixApi.postComment(
+          activeVideo.id,
+          commentRequest.newComment
+        );
+      } else if (commentRequest.action === "delete") {
+        await brainflixApi.deleteComment(
+          activeVideo.id,
+          commentRequest.commentId
+        );
+      } else if (commentRequest.action === "like") {
+        await brainflixApi.likeComment(
+          activeVideo.id,
+          commentRequest.commentId
+        );
+      }
+
+      const updatedComments = await brainflixApi.getComments(activeVideo.id);
+      setComments(updatedComments);
+    },
+    [activeVideo.id, brainflixApi]
+  );
 
   if (notFound) {
     return <Navigate to="/page-not-found" />;
@@ -39,19 +72,26 @@ function VideoDetailsPage() {
 
   return (
     <main>
-      {activeVideo ? (
+      {activeVideo && activeVideo.id ? (
         <>
           <VideoPlayer src={activeVideo.video} image={activeVideo.image} />
           <div className="layout-container">
             <VideoDetails
-              activeVideo={activeVideo}
-              commentCount={commentCount}
+              title={activeVideo.title}
+              channel={activeVideo.channel}
+              description={activeVideo.description}
+              views={activeVideo.views}
+              timestamp={activeVideo.timestamp}
+              commentCount={comments.length}
+              videoLikeCount={videoLikeCount}
+              handleVideoLike={handleVideoLike}
             />
             <CommentSection
+              comments={comments}
               activeVideoId={activeVideo.id}
-              commentCountUpdate={commentCountUpdate}
+              handleCommentUpdate={handleCommentUpdate}
             />
-            <VideoBank activeVideoId={activeVideo.id} />
+            <VideoBank videoList={videoList} activeVideoId={activeVideo.id} />
           </div>
         </>
       ) : (
@@ -62,10 +102,3 @@ function VideoDetailsPage() {
 }
 
 export default VideoDetailsPage;
-
-VideoDetailsPage.propTypes = {
-  videoList: PropTypes.array.isRequired,
-  loadVideoList: PropTypes.func.isRequired,
-  pageCount: PropTypes.number.isRequired,
-  setPageCount: PropTypes.func.isRequired,
-};

@@ -1,7 +1,7 @@
 import "./VideoUploadForm.scss";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { postVideo } from "../../utils/brainflix-api";
+import BrainflixApi from "../../utils/brainflix-api";
 import videoThumbnail from "../../assets/images/Upload-video-preview.jpg";
 import UploadSuccessPopup from "../UploadSuccessPopup/UploadSuccessPopup";
 
@@ -12,6 +12,7 @@ function VideoUploadForm() {
   });
   const [errorMessages, setErrorMessages] = useState({});
   const [popupVisibility, setPopupVisibility] = useState(false);
+  const brainflixApi = useMemo(() => new BrainflixApi(), []);
 
   const handleFieldChange = (event) => {
     const { name, value } = event.target;
@@ -47,7 +48,7 @@ function VideoUploadForm() {
     event.preventDefault();
 
     if (isFormValid()) {
-      await postVideo(newVideo);
+      await brainflixApi.postVideo(newVideo);
       setNewVideo({ title: "", description: "" });
       setErrorMessages({});
       setPopupVisibility(true);
