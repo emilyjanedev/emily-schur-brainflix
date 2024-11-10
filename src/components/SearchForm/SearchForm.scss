@@ -1,9 +1,44 @@
 @use "../../styles/partials/flexbox-kit" as *;
 @use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
 
 .search-form {
+  position: relative;
   flex-grow: 1;
   @include flex-row(flex-end, center);
+
+  &__search-result {
+    position: absolute;
+    border-radius: 4px;
+    top: 3.125rem;
+    background-color: $primary-light;
+    border: 1px solid $secondary-medium;
+    padding: 0.5rem;
+    width: 100%;
+    z-index: 2;
+    @include flex-column(center, start);
+
+    @include tablet {
+      max-width: 17.5rem;
+      top: 2.8125rem;
+    }
+  }
+
+  &__suggestion {
+    padding: 0.25rem;
+    border-radius: 4px;
+    width: 100%;
+
+    @include desktop {
+      &:hover {
+        background-color: $secondary-medium;
+      }
+    }
+
+    &:active {
+      background-color: $secondary-medium;
+    }
+  }
 
   &__search-icon {
     height: 1.25rem;

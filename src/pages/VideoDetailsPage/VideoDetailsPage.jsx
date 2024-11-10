@@ -5,26 +5,24 @@ import VideoBank from "../../components/VideoBank/VideoBank";
 import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { Navigate, useParams } from "react-router-dom";
+import PropTypes from "prop-types";
 import BrainflixApi from "../../utils/brainflix-api";
 
-function VideoDetailsPage() {
+function VideoDetailsPage({ videoList }) {
   const { videoId } = useParams();
   const [activeVideo, setActiveVideo] = useState({});
   const [notFound, setNotFound] = useState(false);
   const [comments, setComments] = useState([]);
-  const [videoList, setVideoList] = useState([]);
   const [videoLikeCount, setVideoLikeCount] = useState(null);
   const brainflixApi = useMemo(() => new BrainflixApi(), []);
 
   useEffect(() => {
     const loadVideoStates = async () => {
       try {
-        const fetchedVideoList = await brainflixApi.getVideos();
-        const videoIdToFetch = videoId || fetchedVideoList[0].id;
+        const videoIdToFetch = videoId || videoList[0].id;
         const fetchedVideo = await brainflixApi.getVideoById(videoIdToFetch);
 
         setActiveVideo(fetchedVideo);
-        setVideoList(fetchedVideoList);
         setComments(
           fetchedVideo.comments.sort((a, b) => b.timestamp - a.timestamp)
         );
@@ -35,7 +33,7 @@ function VideoDetailsPage() {
       }
     };
     loadVideoStates();
-  }, [videoId, brainflixApi]);
+  }, [videoId, brainflixApi, videoList]);
 
   const handleVideoLike = useCallback(async () => {
     const likedVideo = await brainflixApi.likeVideo(activeVideo.id);
@@ -103,3 +101,7 @@ function VideoDetailsPage() {
 }
 
 export default VideoDetailsPage;
+
+VideoDetailsPage.propTypes = {
+  videoList: PropTypes.array.isRequired,
+};
