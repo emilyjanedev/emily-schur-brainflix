@@ -18,8 +18,8 @@ Follow the steps below to configure the necessary environment files.
 
 After setting up, your `.env` file should look like this:
 
-VITE_BRAINFLIX_API_BASE_URL=http://localhost:8080
-VITE_BRAINFLIX_API_KEY=your-api-key-here
+- VITE_BRAINFLIX_API_BASE_URL=http://localhost:8080
+- VITE_BRAINFLIX_API_KEY=your-api-key-here
 
 **Note**: Keep the `.env` file secure and avoid sharing it publicly. This file should already be included in `.gitignore` to prevent it from being committed to version control.
 
