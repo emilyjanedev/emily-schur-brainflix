@@ -21,7 +21,7 @@ class BrainflixApi {
   async postVideo(newVideo) {
     try {
       const { data } = await axios.post(
-        `${this.apiBaseUrl}/videos?api_key=?api_key=${this.apiKey}`,
+        `${this.apiBaseUrl}/videos?api_key=${this.apiKey}`,
         newVideo
       );
       return data;

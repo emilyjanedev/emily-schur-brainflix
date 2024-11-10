@@ -8,7 +8,7 @@ import { Navigate, useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import BrainflixApi from "../../utils/brainflix-api";
 
-function VideoDetailsPage({ videoList }) {
+function VideoDetailsPage({ videoList, loadVideoList }) {
   const { videoId } = useParams();
   const [activeVideo, setActiveVideo] = useState({});
   const [notFound, setNotFound] = useState(false);
@@ -21,7 +21,7 @@ function VideoDetailsPage({ videoList }) {
       try {
         const videoIdToFetch = videoId || videoList[0].id;
         const fetchedVideo = await brainflixApi.getVideoById(videoIdToFetch);
-
+        await loadVideoList();
         setActiveVideo(fetchedVideo);
         setComments(
           fetchedVideo.comments.sort((a, b) => b.timestamp - a.timestamp)
@@ -33,7 +33,7 @@ function VideoDetailsPage({ videoList }) {
       }
     };
     loadVideoStates();
-  }, [videoId, brainflixApi, videoList]);
+  }, [videoId, brainflixApi, videoList, loadVideoList]);
 
   const handleVideoLike = useCallback(async () => {
     const likedVideo = await brainflixApi.likeVideo(activeVideo.id);
@@ -104,4 +104,5 @@ export default VideoDetailsPage;
 
 VideoDetailsPage.propTypes = {
   videoList: PropTypes.array.isRequired,
+  loadVideoList: PropTypes.func.isRequired,
 };
