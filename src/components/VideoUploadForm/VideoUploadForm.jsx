@@ -19,15 +19,15 @@ function VideoUploadForm() {
   const handleFieldChange = (event) => {
     const { name, value, files } = event.target;
     if (name === "file") {
-      setNewVideo((prevData) => ({
-        ...prevData,
+      setNewVideo({
+        ...newVideo,
         [name]: files[0],
-      }));
+      });
     } else {
-      setNewVideo((prevData) => ({
-        ...prevData,
+      setNewVideo({
+        ...newVideo,
         [name]: value,
-      }));
+      });
     }
   };
 
@@ -91,13 +91,11 @@ function VideoUploadForm() {
           <label htmlFor="file" className="video-upload-form__label">
             VIDEO THUMBNAIL
           </label>
-          <div className="video-upload-form__image-wrapper">
-            <img
-              src={imagePreview}
-              alt="video thumbnail"
-              className="video-upload-form__thumbnail"
-            />
-          </div>
+          <img
+            src={imagePreview}
+            alt="video thumbnail"
+            className="video-upload-form__thumbnail"
+          />
           <input
             type="file"
             accept="image/*"
