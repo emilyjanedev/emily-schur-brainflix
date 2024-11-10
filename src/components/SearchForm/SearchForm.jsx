@@ -20,9 +20,13 @@ function SearchForm({ videoList }) {
     console.log(suggestions.length);
   };
 
+  const handleClick = (videoTitle) => {
+    setSearch(videoTitle);
+  };
+
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => {
-    setTimeout(() => setIsFocused(false), 100);
+    setTimeout(() => setIsFocused(false), 150);
   };
 
   const handleSubmit = (event) => {
@@ -30,7 +34,7 @@ function SearchForm({ videoList }) {
 
     if (suggestions.length === 1) {
       navigate(`/videos/${suggestions[0].id}`);
-      setSearch("");
+      setSearch(suggestions[0].title);
     }
   };
 
@@ -55,6 +59,7 @@ function SearchForm({ videoList }) {
                 to={`/videos/${suggestion.id}`}
                 key={suggestion.id}
                 className="search-form__suggestion"
+                onClick={() => handleClick(suggestion.title)}
               >
                 {suggestion.title}
               </Link>
