@@ -3,11 +3,14 @@ import axios from "axios";
 class BrainflixApi {
   constructor() {
     this.apiBaseUrl = import.meta.env.VITE_BRAINFLIX_API_BASE_URL;
+    this.apiKey = import.meta.env.VITE_BRAINFLIX_API_KEY;
   }
 
   async getVideos() {
     try {
-      const { data } = await axios.get(`${this.apiBaseUrl}/videos`);
+      const { data } = await axios.get(
+        `${this.apiBaseUrl}/videos?api_key=${this.apiKey}`
+      );
       return data;
     } catch (error) {
       console.error("Could not fetch videos", error);
@@ -17,7 +20,10 @@ class BrainflixApi {
 
   async postVideo(newVideo) {
     try {
-      const { data } = await axios.post(`${this.apiBaseUrl}/videos`, newVideo);
+      const { data } = await axios.post(
+        `${this.apiBaseUrl}/videos?api_key=?api_key=${this.apiKey}`,
+        newVideo
+      );
       return data;
     } catch (error) {
       console.error("Could not post video.", error);
@@ -28,7 +34,7 @@ class BrainflixApi {
   async getComments(activeVideoId) {
     try {
       const { data } = await axios.get(
-        `${this.apiBaseUrl}/videos/${activeVideoId}`
+        `${this.apiBaseUrl}/videos/${activeVideoId}?api_key=${this.apiKey}`
       );
       return data.comments.sort((a, b) => b.timestamp - a.timestamp);
     } catch (error) {
@@ -39,7 +45,9 @@ class BrainflixApi {
 
   async getVideoById(id) {
     try {
-      const { data } = await axios.get(`${this.apiBaseUrl}/videos/${id}`);
+      const { data } = await axios.get(
+        `${this.apiBaseUrl}/videos/${id}?api_key=${this.apiKey}`
+      );
       return data;
     } catch (error) {
       console.error("Could not fetch video", error);
@@ -50,7 +58,7 @@ class BrainflixApi {
   async postComment(activeVideoId, comment) {
     try {
       const { data } = await axios.post(
-        `${this.apiBaseUrl}/videos/${activeVideoId}/comments`,
+        `${this.apiBaseUrl}/videos/${activeVideoId}/comments?api_key=${this.apiKey}`,
         comment
       );
       return data;
@@ -63,7 +71,7 @@ class BrainflixApi {
   async likeVideo(activeVideoId) {
     try {
       const { data } = await axios.put(
-        `${this.apiBaseUrl}/videos/${activeVideoId}/likes`
+        `${this.apiBaseUrl}/videos/${activeVideoId}/likes?api_key=${this.apiKey}`
       );
       return data;
     } catch (error) {
@@ -75,7 +83,7 @@ class BrainflixApi {
   async deleteComment(activeVideoId, commentId) {
     try {
       await axios.delete(
-        `${this.apiBaseUrl}/videos/${activeVideoId}/comments/${commentId}`
+        `${this.apiBaseUrl}/videos/${activeVideoId}/comments/${commentId}?api_key=${this.apiKey}`
       );
     } catch (error) {
       console.error("Could not delete comment", error);
@@ -86,7 +94,7 @@ class BrainflixApi {
   async likeComment(activeVideoId, commentId) {
     try {
       const { data } = await axios.put(
-        `${this.apiBaseUrl}/videos/${activeVideoId}/comments/${commentId}`
+        `${this.apiBaseUrl}/videos/${activeVideoId}/comments/${commentId}?api_key=${this.apiKey}`
       );
       return data.likes;
     } catch (error) {

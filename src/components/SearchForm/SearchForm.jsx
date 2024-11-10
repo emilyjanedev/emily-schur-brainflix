@@ -17,7 +17,6 @@ function SearchForm({ videoList }) {
         video.title.toLowerCase().includes(event.target.value.toLowerCase())
       )
     );
-    console.log(suggestions.length);
   };
 
   const handleClick = (videoTitle) => {
