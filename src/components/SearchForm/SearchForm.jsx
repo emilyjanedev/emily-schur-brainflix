@@ -45,6 +45,7 @@ function SearchForm({ videoList }) {
         id="search"
         autoComplete="off"
         value={search}
+        placeholder="Search"
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
