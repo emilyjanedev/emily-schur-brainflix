@@ -12,7 +12,7 @@ Follow the steps below to configure the necessary environment files.
 ### Environment Variables Overview
 
 - **`VITE_BRAINFLIX_API_BASE_URL`**: The base URL for the Brainflix API. This should already be prefilled in `.env.example` but can be updated if necessary.
-- **`VITE_BRAINFLIX_API_KEY`**: Your unique API key for accessing the Brainflix API. This is required to make API calls.
+- **`VITE_BRAINFLIX_API_KEY`**: Your unique API key for accessing the Brainflix API. This is required to make API calls. This has been pre-filled with a "guest" key that is already registered with the API.
 
 ### Example `.env` File
 

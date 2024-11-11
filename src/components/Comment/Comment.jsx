@@ -62,7 +62,6 @@ function Comment({ comment, handleCommentUpdate }) {
 Comment.propTypes = {
   comment: PropTypes.object.isRequired,
   handleCommentUpdate: PropTypes.func.isRequired,
-  activeVideoId: PropTypes.string.isRequired,
 };
 
 export default Comment;
