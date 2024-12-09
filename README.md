@@ -30,3 +30,6 @@ After setting up your `.env` file, you can start the development server:
 `npm run dev`
 
 If you encounter any issues with API requests, double-check that the values in your `.env` file are correct.
+
+## Brainflix API
+Link to backend repo: [Brainflix API](https://github.com/emilyjanedev/emily-schur-brainflix-api)
